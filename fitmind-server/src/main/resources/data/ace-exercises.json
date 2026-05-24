@@ -1,0 +1,2972 @@
+[
+    {
+        "id":  170,
+        "name":  "Agility Ladder: Lateral Shuffle",
+        "target":  "Butt/Hips, Full Body/Integrated, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Ladder",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/170/agility-ladder-lateral-shuffle/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/170-1.jpg"
+    },
+    {
+        "id":  246,
+        "name":  "Alternate Leg Push-off",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Raised Platform/Box",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/246/alternate-leg-push-off/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/246-1.jpg"
+    },
+    {
+        "id":  376,
+        "name":  "Asynchronous Waves",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Heavy Ropes",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/376/asynchronous-waves/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/376-1.jpg"
+    },
+    {
+        "id":  11,
+        "name":  "Back Squat",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/11/back-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/11-1.jpg"
+    },
+    {
+        "id":  236,
+        "name":  "Barbell Jammers",
+        "target":  "Abs, Butt/Hips, Full Body/Integrated, Legs - Calves and Shins, Legs - Thighs, Shoulders",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/236/barbell-jammers/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/236-1.jpg"
+    },
+    {
+        "id":  12,
+        "name":  "Bent-over Row",
+        "target":  "Arms, Back, Shoulders",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/12/bent-over-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/12-1.jpg"
+    },
+    {
+        "id":  119,
+        "name":  "BOSU Lateral Jumps",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/119/bosu-sup-reg-sup-lateral-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/119-1.jpg"
+    },
+    {
+        "id":  396,
+        "name":  "Bottom-up Press",
+        "target":  "Chest, Full Body/Integrated, Shoulders",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/396/bottom-up-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/396-1.jpg"
+    },
+    {
+        "id":  366,
+        "name":  "Bulgarian Split Squat",
+        "target":  "Butt/Hips",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/366/bulgarian-split-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/366-1.jpg"
+    },
+    {
+        "id":  306,
+        "name":  "Burpee",
+        "target":  "Full Body/Integrated",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/306/burpee/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/306-1.jpg"
+    },
+    {
+        "id":  383,
+        "name":  "Clean and Press",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/383/clean-and-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/383-1.jpg"
+    },
+    {
+        "id":  6,
+        "name":  "Deadlift",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/6/deadlift/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/6-1.jpg"
+    },
+    {
+        "id":  384,
+        "name":  "Double Push-press",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/384/double-push-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/384-1.jpg"
+    },
+    {
+        "id":  378,
+        "name":  "Double Rotation Waves",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Heavy Ropes",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/378/double-rotation-waves/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/378-1.jpg"
+    },
+    {
+        "id":  95,
+        "name":  "Forward Lunge with Arm Drivers",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/95/forward-lunge-with-arm-drivers/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/95-1.jpg"
+    },
+    {
+        "id":  315,
+        "name":  "Front Squat to Overhead Press",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/315/front-squat-to-overhead-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/315-1.jpg"
+    },
+    {
+        "id":  96,
+        "name":  "Glute Activation Lunges",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/96/glute-activation-lunges/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/96-1.jpg"
+    },
+    {
+        "id":  394,
+        "name":  "Halo",
+        "target":  "Back, Butt/Hips, Chest, Full Body/Integrated, Legs - Thighs, Shoulders",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/394/halo/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/394-1.jpg"
+    },
+    {
+        "id":  312,
+        "name":  "Hang Clean",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/312/hang-clean/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/312-1.jpg"
+    },
+    {
+        "id":  207,
+        "name":  "Hexagon Drill",
+        "target":  "Abs, Butt/Hips, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "Cones",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/207/hexagon-drill/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/207-1.jpg"
+    },
+    {
+        "id":  330,
+        "name":  "High Plank T-spine Rotation",
+        "target":  "Abs, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/330/high-plank-t-spine-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/330-1.jpg"
+    },
+    {
+        "id":  386,
+        "name":  "High Windmill",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/386/high-windmill/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/386-1.jpg"
+    },
+    {
+        "id":  254,
+        "name":  "Inchworms",
+        "target":  "Abs, Arms, Back, Chest, Full Body/Integrated, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/254/inchworms/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/254-1.jpg"
+    },
+    {
+        "id":  144,
+        "name":  "Inverted Flyers",
+        "target":  "Abs, Butt/Hips, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/144/inverted-flyers/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/144-1.jpg"
+    },
+    {
+        "id":  340,
+        "name":  "Kneeling Wood Chop",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/340/kneeling-wood-chop/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/340-1.jpg"
+    },
+    {
+        "id":  347,
+        "name":  "Lateral Lunge Wood Chop",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/347/lateral-lunge-wood-chop/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/347-1.jpg"
+    },
+    {
+        "id":  377,
+        "name":  "Lateral Waves",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Heavy Ropes",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/377/lateral-waves/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/377-1.jpg"
+    },
+    {
+        "id":  272,
+        "name":  "Lateral Zig Zags",
+        "target":  "Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Cones",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/272/lateral-zig-zags/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/272-1.jpg"
+    },
+    {
+        "id":  387,
+        "name":  "Low Windmill",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/387/low-windmill/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/387-1.jpg"
+    },
+    {
+        "id":  345,
+        "name":  "Lunge to Single Arm Row",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/345/lunge-to-single-arm-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/345-1.jpg"
+    },
+    {
+        "id":  143,
+        "name":  "Lunge with Overhead Press",
+        "target":  "Abs, Butt/Hips, Full Body/Integrated, Legs - Thighs, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/143/lunge-with-overhead-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/143-1.jpg"
+    },
+    {
+        "id":  264,
+        "name":  "Medicine Ball Lunge to Chest Pass",
+        "target":  "Abs, Back, Butt/Hips, Chest, Full Body/Integrated, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/264/medicine-ball-lunge-to-chest-pass/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/264-1.jpg"
+    },
+    {
+        "id":  40,
+        "name":  "Medicine Ball Push-ups",
+        "target":  "Abs, Chest, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/40/medicine-ball-push-ups/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/40-1.jpg"
+    },
+    {
+        "id":  258,
+        "name":  "Mountain Climbers",
+        "target":  "Butt/Hips, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/258/mountain-climbers/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/258-1.jpg"
+    },
+    {
+        "id":  172,
+        "name":  "Multidirectional Ladder Drill",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Ladder",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/172/multidirectional-ladder-drill/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/172-1.jpg"
+    },
+    {
+        "id":  356,
+        "name":  "Offset Single-arm Chest Press",
+        "target":  "Chest, Full Body/Integrated",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/356/offset-single-arm-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/356-1.jpg"
+    },
+    {
+        "id":  308,
+        "name":  "Pistol Squat Workout",
+        "target":  "Butt/Hips",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/308/pistol-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/308-1.jpg"
+    },
+    {
+        "id":  125,
+        "name":  "Power Clean",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/125/power-clean/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/125-1.jpg"
+    },
+    {
+        "id":  286,
+        "name":  "Power Push Down",
+        "target":  "Arms, Chest",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/286/power-push-down/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/286-1.jpg"
+    },
+    {
+        "id":  300,
+        "name":  "Prone ABC\u0027s",
+        "target":  "Abs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/300/prone-abc-s/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/300-1.jpg"
+    },
+    {
+        "id":  298,
+        "name":  "Prone Runner",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/298/prone-runner/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/298-1.jpg"
+    },
+    {
+        "id":  342,
+        "name":  "Pull to Press",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/342/pull-to-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/342-1.jpg"
+    },
+    {
+        "id":  313,
+        "name":  "Push Jerk",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/313/push-jerk/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/313-1.jpg"
+    },
+    {
+        "id":  24,
+        "name":  "Push Press",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/24/push-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/24-1.jpg"
+    },
+    {
+        "id":  385,
+        "name":  "Push-jerk",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/385/push-jerk/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/385-1.jpg"
+    },
+    {
+        "id":  42,
+        "name":  "Push-up with Single-leg Raise",
+        "target":  "Arms, Butt/Hips, Chest, Full Body/Integrated, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/42/push-up-with-single-leg-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/42-1.jpg"
+    },
+    {
+        "id":  327,
+        "name":  "Push-up with Staggered Hands",
+        "target":  "Arms, Chest",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/327/push-up-with-staggered-hands/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/327-1.jpg"
+    },
+    {
+        "id":  355,
+        "name":  "Renegade Row",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/355/renegade-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/355-1.jpg"
+    },
+    {
+        "id":  360,
+        "name":  "Reverse Lunge with Rotation",
+        "target":  "Abs, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/360/reverse-lunge-with-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/360-1.jpg"
+    },
+    {
+        "id":  309,
+        "name":  "Roll Out",
+        "target":  "Abs",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/309/roll-out/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/309-1.jpg"
+    },
+    {
+        "id":  368,
+        "name":  "Rotational Overhead Press",
+        "target":  "Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/368/rotational-overhead-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/368-1.jpg"
+    },
+    {
+        "id":  287,
+        "name":  "Rotational Slam",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/287/rotational-slam/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/287-1.jpg"
+    },
+    {
+        "id":  65,
+        "name":  "Russian Twist",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/65/russian-twist/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/65-1.jpg"
+    },
+    {
+        "id":  99,
+        "name":  "Side Plank (Modified)",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/99/side-plank-modified/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/99-1.jpg"
+    },
+    {
+        "id":  343,
+        "name":  "Side Plank Row",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/343/side-plank-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/343-1.jpg"
+    },
+    {
+        "id":  223,
+        "name":  "Side-lying Arm Rolls",
+        "target":  "Abs, Shoulders",
+        "equipment":  "Dumbbells, No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/223/side-lying-arm-rolls/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/223-1.jpg"
+    },
+    {
+        "id":  375,
+        "name":  "Simultaneous Wave with Reverse Lunges",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Heavy Ropes",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/375/simultaneous-wave-with-reverse-lunges/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/375-1.jpg"
+    },
+    {
+        "id":  374,
+        "name":  "Simultaneous Waves",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Heavy Ropes",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/374/simultaneous-waves/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/374-1.jpg"
+    },
+    {
+        "id":  393,
+        "name":  "Single Arm Overhead Squat",
+        "target":  "Back, Full Body/Integrated, Legs - Thighs, Shoulders",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/393/single-arm-overhead-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/393-1.jpg"
+    },
+    {
+        "id":  392,
+        "name":  "Single Arm Swing",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/392/single-arm-swing/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/392-1.jpg"
+    },
+    {
+        "id":  325,
+        "name":  "Single Arm, Single Leg Plank",
+        "target":  "Full Body/Integrated",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/325/single-arm-single-leg-plank/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/325-1.jpg"
+    },
+    {
+        "id":  301,
+        "name":  "Single Leg Hamstring Curl",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/301/single-leg-hamstring-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/301-1.jpg"
+    },
+    {
+        "id":  350,
+        "name":  "Single Leg Romanian Dead Lift",
+        "target":  "Butt/Hips",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/350/single-leg-romanian-dead-lift/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/350-1.jpg"
+    },
+    {
+        "id":  134,
+        "name":  "Single-arm Medicine Ball Push-up",
+        "target":  "Abs, Arms, Chest, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/134/single-arm-medicine-ball-push-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/134-1.jpg"
+    },
+    {
+        "id":  339,
+        "name":  "Single-arm Rotational Press",
+        "target":  "Chest",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/339/single-arm-rotational-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/339-1.jpg"
+    },
+    {
+        "id":  127,
+        "name":  "Single-arm, Single-leg Romanian Dead Lift",
+        "target":  "Back, Butt/Hips",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/127/single-arm-single-leg-romanian-dead-lift/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/127-1.jpg"
+    },
+    {
+        "id":  329,
+        "name":  "Single-leg Romanian Deadlift",
+        "target":  "Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/329/single-leg-romanian-deadlift/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/329-1.jpg"
+    },
+    {
+        "id":  114,
+        "name":  "Single-leg Stand with Reaches",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/114/single-leg-stand-with-reaches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/114-1.jpg"
+    },
+    {
+        "id":  314,
+        "name":  "Snatch",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/314/snatch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/314-1.jpg"
+    },
+    {
+        "id":  219,
+        "name":  "Spinal Twist with a Push-Pull Movement",
+        "target":  "Back, Chest, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/219/spinal-twist-with-a-push-pull-movement/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/219-1.jpg"
+    },
+    {
+        "id":  357,
+        "name":  "Squat to Overhead Press",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/357/squat-to-overhead-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/357-1.jpg"
+    },
+    {
+        "id":  60,
+        "name":  "Stability Ball Knee Tucks",
+        "target":  "Abs, Legs - Calves and Shins",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/60/stability-ball-knee-tucks/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/60-1.jpg"
+    },
+    {
+        "id":  61,
+        "name":  "Stability Ball Pikes",
+        "target":  "Abs, Shoulders",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/61/stability-ball-pikes/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/61-1.jpg"
+    },
+    {
+        "id":  64,
+        "name":  "Stability Ball Reverse Extensions",
+        "target":  "Back, Butt/Hips",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/64/stability-ball-reverse-extensions/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/64-1.jpg"
+    },
+    {
+        "id":  105,
+        "name":  "Standing Hay Baler",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/105/standing-hay-baler/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/105-1.jpg"
+    },
+    {
+        "id":  349,
+        "name":  "Standing Rotational Chop",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/349/standing-rotational-chop/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/349-1.jpg"
+    },
+    {
+        "id":  71,
+        "name":  "Standing Shoulder Press",
+        "target":  "Arms, Shoulders",
+        "equipment":  "Barbell",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/71/standing-shoulder-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/71-1.jpg"
+    },
+    {
+        "id":  107,
+        "name":  "Standing Single-leg Cable Rotation",
+        "target":  "Abs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/107/standing-single-leg-cable-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/107-1.jpg"
+    },
+    {
+        "id":  108,
+        "name":  "Standing Wood Chop",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/108/standing-wood-chop/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/108-1.jpg"
+    },
+    {
+        "id":  297,
+        "name":  "Supine Suitcase Pass",
+        "target":  "Abs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/297/supine-suitcase-pass/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/297-1.jpg"
+    },
+    {
+        "id":  171,
+        "name":  "T Drill",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Cones",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/171/t-drill/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/171-1.jpg"
+    },
+    {
+        "id":  365,
+        "name":  "Transverse Lunge",
+        "target":  "Butt/Hips",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/365/transverse-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/365-1.jpg"
+    },
+    {
+        "id":  346,
+        "name":  "Transverse Lunge to Single Arm Row",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/346/transverse-lunge-to-single-arm-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/346-1.jpg"
+    },
+    {
+        "id":  77,
+        "name":  "TRX Atomic Push-up",
+        "target":  "Abs, Arms, Chest, Shoulders",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/77/trx-reg-atomic-push-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/77-1.jpg"
+    },
+    {
+        "id":  84,
+        "name":  "TRX Back Row",
+        "target":  "Abs, Arms, Back",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/84/trx-reg-back-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/84-1.jpg"
+    },
+    {
+        "id":  78,
+        "name":  "TRX Biceps Curl",
+        "target":  "Abs, Arms",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/78/trx-reg-biceps-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/78-1.jpg"
+    },
+    {
+        "id":  85,
+        "name":  "TRX Chest Press",
+        "target":  "Abs, Arms, Chest",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/85/trx-reg-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/85-1.jpg"
+    },
+    {
+        "id":  79,
+        "name":  "TRX Front Rollout",
+        "target":  "Abs",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/79/trx-reg-front-rollout/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/79-1.jpg"
+    },
+    {
+        "id":  86,
+        "name":  "TRX Hamstrings Curl",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/86/trx-reg-hamstrings-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/86-1.jpg"
+    },
+    {
+        "id":  90,
+        "name":  "TRX Hip Press",
+        "target":  "Back, Butt/Hips, Legs - Thighs",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/90/trx-reg-hip-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/90-1.jpg"
+    },
+    {
+        "id":  80,
+        "name":  "TRX Overhead Triceps Extension",
+        "target":  "Arms",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/80/trx-reg-overhead-triceps-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/80-1.jpg"
+    },
+    {
+        "id":  81,
+        "name":  "TRX Side-straddle Golf Swings",
+        "target":  "Back, Chest, Shoulders",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/81/trx-reg-side-straddle-golf-swings/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/81-1.jpg"
+    },
+    {
+        "id":  91,
+        "name":  "TRX Single-arm Chest Press",
+        "target":  "Abs, Arms, Chest",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/91/trx-reg-single-arm-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/91-1.jpg"
+    },
+    {
+        "id":  92,
+        "name":  "TRX Single-arm Row",
+        "target":  "Abs, Arms, Back",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/92/trx-reg-single-arm-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/92-1.jpg"
+    },
+    {
+        "id":  87,
+        "name":  "TRX Suspended Knee Tucks",
+        "target":  "Abs, Chest",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/87/trx-reg-suspended-knee-tucks/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/87-1.jpg"
+    },
+    {
+        "id":  93,
+        "name":  "TRX Suspended Lunge",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/93/trx-reg-suspended-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/93-1.jpg"
+    },
+    {
+        "id":  88,
+        "name":  "TRX Suspended Pike",
+        "target":  "Abs, Shoulders",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/88/trx-reg-suspended-pike/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/88-1.jpg"
+    },
+    {
+        "id":  89,
+        "name":  "TRX Suspended Push-up",
+        "target":  "Arms, Chest, Shoulders",
+        "equipment":  "TRX",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/89/trx-reg-suspended-push-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/89-1.jpg"
+    },
+    {
+        "id":  388,
+        "name":  "Turkish Get-up",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/388/turkish-get-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/388-1.jpg"
+    },
+    {
+        "id":  390,
+        "name":  "Waiter\u0027s Carry",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Advanced",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/390/waiter-s-carry/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/390-1.jpg"
+    },
+    {
+        "id":  198,
+        "name":  "90 Lat Stretch",
+        "target":  "Back",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/198/90-lat-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/198-1.jpg"
+    },
+    {
+        "id":  23,
+        "name":  "Ankle Flexion",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/23/ankle-flexion/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/23-1.jpg"
+    },
+    {
+        "id":  348,
+        "name":  "Anti-rotation Reverse Lunge",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/348/anti-rotation-reverse-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/348-1.jpg"
+    },
+    {
+        "id":  13,
+        "name":  "Bent Knee Push-up",
+        "target":  "Arms, Chest, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/13/bent-knee-push-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/13-1.jpg"
+    },
+    {
+        "id":  135,
+        "name":  "Bodyweight Squat",
+        "target":  "Abs, Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/135/bodyweight-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/135-1.jpg"
+    },
+    {
+        "id":  294,
+        "name":  "Calf Raise",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/294/calf-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/294-1.jpg"
+    },
+    {
+        "id":  15,
+        "name":  "Cat-Cow",
+        "target":  "Back, Chest",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/15/cat-cow/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/15-1.jpg"
+    },
+    {
+        "id":  5,
+        "name":  "Chest Press",
+        "target":  "Arms, Chest, Shoulders",
+        "equipment":  "Barbell, Bench",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/5/chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/5-1.jpg"
+    },
+    {
+        "id":  227,
+        "name":  "Childs Pose",
+        "target":  "Abs, Back, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/227/childs-pose/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/227-1.jpg"
+    },
+    {
+        "id":  16,
+        "name":  "Cobra Exercise",
+        "target":  "Abs, Back",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/16/cobra/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/16-1.jpg"
+    },
+    {
+        "id":  53,
+        "name":  "Contralateral Limb Raises",
+        "target":  "Back, Butt/Hips, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/53/contralateral-limb-raises/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/53-1.jpg"
+    },
+    {
+        "id":  52,
+        "name":  "Crunch",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/52/crunch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/52-1.jpg"
+    },
+    {
+        "id":  304,
+        "name":  "Decline Plank",
+        "target":  "Abs",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/304/decline-plank/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/304-1.jpg"
+    },
+    {
+        "id":  109,
+        "name":  "Dirty Dog",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/109/dirty-dog/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/109-1.jpg"
+    },
+    {
+        "id":  221,
+        "name":  "Forward Hurdle Run",
+        "target":  "Butt/Hips, Legs - Calves and Shins",
+        "equipment":  "Hurdles",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/221/forward-hurdle-run/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/221-1.jpg"
+    },
+    {
+        "id":  177,
+        "name":  "Forward Linear Jumps",
+        "target":  "Butt/Hips, Full Body/Integrated, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/177/forward-linear-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/177-1.jpg"
+    },
+    {
+        "id":  111,
+        "name":  "Forward Stepping over Cones",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "Cones",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/111/forward-stepping-over-cones/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/111-1.jpg"
+    },
+    {
+        "id":  54,
+        "name":  "Front Raise",
+        "target":  "Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/54/front-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/54-1.jpg"
+    },
+    {
+        "id":  49,
+        "name":  "Glute Bridge Exercise",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/49/glute-bridge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/49-1.jpg"
+    },
+    {
+        "id":  293,
+        "name":  "Glute Press",
+        "target":  "Butt/Hips",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/293/glute-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/293-1.jpg"
+    },
+    {
+        "id":  97,
+        "name":  "Half-kneeling Hay Baler",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/97/half-kneeling-hay-baler/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/97-1.jpg"
+    },
+    {
+        "id":  33,
+        "name":  "Hip Hinge",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Barbell",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/33/hip-hinge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/33-1.jpg"
+    },
+    {
+        "id":  25,
+        "name":  "Incline Chest Press",
+        "target":  "Chest, Shoulders",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/25/incline-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/25-1.jpg"
+    },
+    {
+        "id":  34,
+        "name":  "Incline Reverse Fly",
+        "target":  "Back, Shoulders",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/34/incline-reverse-fly/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/34-1.jpg"
+    },
+    {
+        "id":  299,
+        "name":  "Kneeling ABC\u0027s",
+        "target":  "Abs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/299/kneeling-abc-s/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/299-1.jpg"
+    },
+    {
+        "id":  142,
+        "name":  "Kneeling Hip-flexor Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/142/kneeling-hip-flexor-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/142-1.jpg"
+    },
+    {
+        "id":  141,
+        "name":  "Kneeling Lat Stretch (w/bench)",
+        "target":  "Back",
+        "equipment":  "Bench",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/141/kneeling-lat-stretch-w-bench/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/141-1.jpg"
+    },
+    {
+        "id":  195,
+        "name":  "Kneeling TA Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/195/kneeling-ta-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/195-1.jpg"
+    },
+    {
+        "id":  202,
+        "name":  "Lateral Neck Flexion",
+        "target":  "Neck",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/202/lateral-neck-flexion/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/202-1.jpg"
+    },
+    {
+        "id":  26,
+        "name":  "Lateral Raise",
+        "target":  "Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/26/lateral-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/26-1.jpg"
+    },
+    {
+        "id":  295,
+        "name":  "Lateral Shoulder Raise",
+        "target":  "Shoulders",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/295/lateral-shoulder-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/295-1.jpg"
+    },
+    {
+        "id":  181,
+        "name":  "Lateral Shuffles",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Cones",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/181/lateral-shuffles/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/181-1.jpg"
+    },
+    {
+        "id":  231,
+        "name":  "Leg Crossover Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/231/leg-crossover-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/231-1.jpg"
+    },
+    {
+        "id":  153,
+        "name":  "Lying Hamstrings Curl",
+        "target":  "Butt/Hips",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/153/lying-hamstrings-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/153-1.jpg"
+    },
+    {
+        "id":  273,
+        "name":  "Modified Hurdler\u0027s Stretch",
+        "target":  "Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/273/modified-hurdler-s-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/273-1.jpg"
+    },
+    {
+        "id":  204,
+        "name":  "Neck Flexion and Extension",
+        "target":  "Neck",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/204/neck-flexion-and-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/204-1.jpg"
+    },
+    {
+        "id":  174,
+        "name":  "Overhead Triceps Stretch",
+        "target":  "Arms",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/174/overhead-triceps-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/174-1.jpg"
+    },
+    {
+        "id":  265,
+        "name":  "Partner Assisted Bodyweight Squats",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/265/partner-assisted-bodyweight-squats/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/265-1.jpg"
+    },
+    {
+        "id":  269,
+        "name":  "Partner Tricep Extension",
+        "target":  "Abs, Arms, Butt/Hips",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/269/partner-tricep-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/269-1.jpg"
+    },
+    {
+        "id":  131,
+        "name":  "Prone (Lying) Hamstrings Curl",
+        "target":  "Legs - Thighs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/131/prone-lying-hamstrings-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/131-1.jpg"
+    },
+    {
+        "id":  270,
+        "name":  "Quadruped Bent-knee Hip Extensions",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/270/quadruped-bent-knee-hip-extensions/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/270-1.jpg"
+    },
+    {
+        "id":  352,
+        "name":  "Rotator Cuff External Rotation",
+        "target":  "Shoulders",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/352/rotator-cuff-external-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/352-1.jpg"
+    },
+    {
+        "id":  351,
+        "name":  "Rotator Cuff Internal Rotation",
+        "target":  "Shoulders",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/351/rotator-cuff-internal-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/351-1.jpg"
+    },
+    {
+        "id":  208,
+        "name":  "Seated Bent-Knee Biceps Stretch",
+        "target":  "Arms",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/208/seated-bent-knee-biceps-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/208-1.jpg"
+    },
+    {
+        "id":  44,
+        "name":  "Seated Biceps Curl",
+        "target":  "Arms",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/44/seated-biceps-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/44-1.jpg"
+    },
+    {
+        "id":  184,
+        "name":  "Seated Biceps Curl",
+        "target":  "Arms",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/184/seated-biceps-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/184-1.jpg"
+    },
+    {
+        "id":  216,
+        "name":  "Seated Butterfly Stretch",
+        "target":  "Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/216/seated-butterfly-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/216-1.jpg"
+    },
+    {
+        "id":  165,
+        "name":  "Seated Cable Press",
+        "target":  "Chest",
+        "equipment":  "Resistance Bands/Cables, Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/165/seated-cable-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/165-1.jpg"
+    },
+    {
+        "id":  214,
+        "name":  "Seated Calf Stretch",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/214/seated-calf-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/214-1.jpg"
+    },
+    {
+        "id":  188,
+        "name":  "Seated Chest Press",
+        "target":  "Chest",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/188/seated-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/188-1.jpg"
+    },
+    {
+        "id":  189,
+        "name":  "Seated Close-Grip Chest Press",
+        "target":  "Arms, Chest",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/189/seated-close-grip-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/189-1.jpg"
+    },
+    {
+        "id":  291,
+        "name":  "Seated Crunch",
+        "target":  "Abs",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/291/seated-crunch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/291-1.jpg"
+    },
+    {
+        "id":  166,
+        "name":  "Seated Decline Cable Press",
+        "target":  "Chest",
+        "equipment":  "Resistance Bands/Cables, Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/166/seated-decline-cable-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/166-1.jpg"
+    },
+    {
+        "id":  46,
+        "name":  "Seated High Back Row",
+        "target":  "Arms, Back, Shoulders",
+        "equipment":  "Bench, Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/46/seated-high-back-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/46-1.jpg"
+    },
+    {
+        "id":  169,
+        "name":  "Seated High Back Rows",
+        "target":  "Arms, Back",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/169/seated-high-back-rows/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/169-1.jpg"
+    },
+    {
+        "id":  167,
+        "name":  "Seated Incline Cable Press",
+        "target":  "Chest",
+        "equipment":  "Resistance Bands/Cables, Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/167/seated-incline-cable-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/167-1.jpg"
+    },
+    {
+        "id":  158,
+        "name":  "Seated Lat Pulldown",
+        "target":  "Back",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/158/seated-lat-pulldown/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/158-1.jpg"
+    },
+    {
+        "id":  183,
+        "name":  "Seated Leg Extension",
+        "target":  "Legs - Thighs",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/183/seated-leg-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/183-1.jpg"
+    },
+    {
+        "id":  154,
+        "name":  "Seated Leg Press Exercise",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/154/seated-leg-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/154-1.jpg"
+    },
+    {
+        "id":  187,
+        "name":  "Seated Machine Close-Grip Shoulder Press",
+        "target":  "Arms, Shoulders",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/187/seated-machine-close-grip-shoulder-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/187-1.jpg"
+    },
+    {
+        "id":  47,
+        "name":  "Seated Medicine Ball Trunk Rotations",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/47/seated-medicine-ball-trunk-rotations/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/47-1.jpg"
+    },
+    {
+        "id":  48,
+        "name":  "Seated Row",
+        "target":  "Arms, Back",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/48/seated-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/48-1.jpg"
+    },
+    {
+        "id":  168,
+        "name":  "Seated Row",
+        "target":  "Arms, Back",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/168-1.jpg"
+    },
+    {
+        "id":  186,
+        "name":  "Seated Shoulder Press",
+        "target":  "Arms, Shoulders",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/186/seated-shoulder-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/186-1.jpg"
+    },
+    {
+        "id":  212,
+        "name":  "Seated Side-Straddle Stretch",
+        "target":  "Abs, Back, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/212/seated-side-straddle-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/212-1.jpg"
+    },
+    {
+        "id":  210,
+        "name":  "Seated Straddle Stretch",
+        "target":  "Back, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/210/seated-straddle-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/210-1.jpg"
+    },
+    {
+        "id":  213,
+        "name":  "Seated Toe Touches",
+        "target":  "Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/213/seated-toe-touches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/213-1.jpg"
+    },
+    {
+        "id":  205,
+        "name":  "Shoulder Packing",
+        "target":  "Back, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/205/shoulder-packing/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/205-1.jpg"
+    },
+    {
+        "id":  38,
+        "name":  "Side Lying Hip Abduction",
+        "target":  "Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/38/side-lying-hip-abduction/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/38-1.jpg"
+    },
+    {
+        "id":  39,
+        "name":  "Side Lying Hip Adduction",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/39/side-lying-hip-adduction/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/39-1.jpg"
+    },
+    {
+        "id":  149,
+        "name":  "Side Lying Quadriceps Stretch",
+        "target":  "Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/149/side-lying-quadriceps-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/149-1.jpg"
+    },
+    {
+        "id":  100,
+        "name":  "Side Plank - modified",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/100/side-plank-modified/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/100-1.jpg"
+    },
+    {
+        "id":  230,
+        "name":  "Single Leg Push-off",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Raised Platform/Box",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/230/single-leg-push-off/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/230-1.jpg"
+    },
+    {
+        "id":  112,
+        "name":  "Single Leg Stand",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/112/single-leg-stand/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/112-1.jpg"
+    },
+    {
+        "id":  354,
+        "name":  "Single-arm Lateral Raise",
+        "target":  "Shoulders",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/354/single-arm-lateral-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/354-1.jpg"
+    },
+    {
+        "id":  222,
+        "name":  "Squat Jump",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/222/squat-jump/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/222-1.jpg"
+    },
+    {
+        "id":  116,
+        "name":  "Squat Jumps",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/116/squat-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/116-1.jpg"
+    },
+    {
+        "id":  68,
+        "name":  "Stability Ball Sit-ups / Crunches",
+        "target":  "Abs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/68/stability-ball-sit-ups-crunches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/68-1.jpg"
+    },
+    {
+        "id":  69,
+        "name":  "Stability Ball Wall Squats",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/69/stability-ball-wall-squats/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/69-1.jpg"
+    },
+    {
+        "id":  322,
+        "name":  "Standing Bicep Curl",
+        "target":  "Arms",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/322/standing-bicep-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/322-1.jpg"
+    },
+    {
+        "id":  73,
+        "name":  "Standing Calf Raises - Wall",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/73/standing-calf-raises-wall/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/73-1.jpg"
+    },
+    {
+        "id":  209,
+        "name":  "Standing Chest Stretch",
+        "target":  "Chest",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/209/standing-chest-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/209-1.jpg"
+    },
+    {
+        "id":  331,
+        "name":  "Standing Crunch",
+        "target":  "Abs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/331/standing-crunch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/331-1.jpg"
+    },
+    {
+        "id":  152,
+        "name":  "Standing Dorsi-Flexion (Calf Stretch)",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/152/standing-dorsi-flexion-calf-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/152-1.jpg"
+    },
+    {
+        "id":  137,
+        "name":  "Standing Lunge Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/137/standing-lunge-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/137-1.jpg"
+    },
+    {
+        "id":  199,
+        "name":  "Standing Shoulder Extension",
+        "target":  "Arms",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/199/standing-shoulder-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/199-1.jpg"
+    },
+    {
+        "id":  28,
+        "name":  "Step-up",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Dumbbells, Raised Platform/Box",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/28/step-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/28-1.jpg"
+    },
+    {
+        "id":  9,
+        "name":  "Supermans",
+        "target":  "Back, Butt/Hips, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/9/supermans/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/9-1.jpg"
+    },
+    {
+        "id":  148,
+        "name":  "Supine 90-90 Hip Rotator Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/148/supine-90-90-hip-rotator-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/148-1.jpg"
+    },
+    {
+        "id":  147,
+        "name":  "Supine Dead Bug",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/147/supine-dead-bug/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/147-1.jpg"
+    },
+    {
+        "id":  235,
+        "name":  "Supine Hamstrings Stretch",
+        "target":  "Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/235/supine-hamstrings-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/235-1.jpg"
+    },
+    {
+        "id":  146,
+        "name":  "Supine Hip Flexor Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/146/supine-hip-flexor-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/146-1.jpg"
+    },
+    {
+        "id":  121,
+        "name":  "Supine Hollowing with Lower Extremity Movements",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/121/supine-hollowing-with-lower-extremity-movements/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/121-1.jpg"
+    },
+    {
+        "id":  7,
+        "name":  "Supine Pelvic Tilts",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/7/supine-pelvic-tilts/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/7-1.jpg"
+    },
+    {
+        "id":  238,
+        "name":  "Supine Reverse Marches",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/238/supine-reverse-marches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/238-1.jpg"
+    },
+    {
+        "id":  122,
+        "name":  "Supine Rotator Cuff",
+        "target":  "Abs, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/122/supine-rotator-cuff/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/122-1.jpg"
+    },
+    {
+        "id":  123,
+        "name":  "Supine Shoulder Flexion",
+        "target":  "Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/123/supine-shoulder-flexion/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/123-1.jpg"
+    },
+    {
+        "id":  124,
+        "name":  "Supine Snow Angel (Wipers) Exercise",
+        "target":  "Abs, Chest, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/124/supine-snow-angel-wipers-exercise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/124-1.jpg"
+    },
+    {
+        "id":  192,
+        "name":  "Thomas Stretch",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/192/thomas-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/192-1.jpg"
+    },
+    {
+        "id":  292,
+        "name":  "Tricep Extension",
+        "target":  "Arms",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/292/tricep-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/292-1.jpg"
+    },
+    {
+        "id":  333,
+        "name":  "Tricep Pressdown Exercise",
+        "target":  "Arms",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/333/tricep-pressdown/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/333-1.jpg"
+    },
+    {
+        "id":  55,
+        "name":  "Triceps Kickback",
+        "target":  "Arms",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/55/triceps-kickback/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/55-1.jpg"
+    },
+    {
+        "id":  3,
+        "name":  "Triceps Pressdown",
+        "target":  "Arms",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/3/triceps-pressdown/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/3-1.jpg"
+    },
+    {
+        "id":  185,
+        "name":  "Triceps Pushdowns",
+        "target":  "Arms",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/185/triceps-pushdowns/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/185-1.jpg"
+    },
+    {
+        "id":  244,
+        "name":  "Upward Facing Dog",
+        "target":  "Abs, Back",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/244/upward-facing-dog/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/244-1.jpg"
+    },
+    {
+        "id":  263,
+        "name":  "V Sit Partner Rotations",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/263/v-sit-partner-rotations/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/263-1.jpg"
+    },
+    {
+        "id":  370,
+        "name":  "V-raise",
+        "target":  "Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/370/v-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/370-1.jpg"
+    },
+    {
+        "id":  290,
+        "name":  "Walking Abduction",
+        "target":  "Butt/Hips",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/290/walking-abduction/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/290-1.jpg"
+    },
+    {
+        "id":  228,
+        "name":  "Warrior I",
+        "target":  "Butt/Hips, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/228/warrior-i/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/228-1.jpg"
+    },
+    {
+        "id":  29,
+        "name":  "Wrist Curl - Extension",
+        "target":  "Arms",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/29/wrist-curl-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/29-1.jpg"
+    },
+    {
+        "id":  30,
+        "name":  "Wrist Curl - Flexion",
+        "target":  "Arms",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/30/wrist-curl-flexion/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/30-1.jpg"
+    },
+    {
+        "id":  31,
+        "name":  "Wrist Supination \u0026 Pronation Exercises",
+        "target":  "Arms",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Beginner",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/31/wrist-supination-and-pronation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/31-1.jpg"
+    },
+    {
+        "id":  150,
+        "name":  "Bear Crawl Exercise",
+        "target":  "Full Body/Integrated",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/150/bear-crawl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/150-1.jpg"
+    },
+    {
+        "id":  70,
+        "name":  "Bicep Curl",
+        "target":  "Arms",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/70/bicep-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/70-1.jpg"
+    },
+    {
+        "id":  14,
+        "name":  "Bird-dog",
+        "target":  "Abs, Back, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/14-1.jpg"
+    },
+    {
+        "id":  117,
+        "name":  "BOSU Squat Jumps",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/117/bosu-sup-reg-sup-squat-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/117-1.jpg"
+    },
+    {
+        "id":  115,
+        "name":  "Box Jumps",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Raised Platform/Box",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/115/box-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/115-1.jpg"
+    },
+    {
+        "id":  51,
+        "name":  "Calf Raises",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/51/calf-raises/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/51-1.jpg"
+    },
+    {
+        "id":  19,
+        "name":  "Chest Press",
+        "target":  "Arms, Chest, Shoulders",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/19/chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/19-1.jpg"
+    },
+    {
+        "id":  190,
+        "name":  "Chin-ups",
+        "target":  "Arms, Back",
+        "equipment":  "Pull up bar",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/190/chin-ups/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/190-1.jpg"
+    },
+    {
+        "id":  259,
+        "name":  "CKC Parascapular Exercises",
+        "target":  "Chest, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/259/ckc-parascapular-exercises/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/259-1.jpg"
+    },
+    {
+        "id":  311,
+        "name":  "Close-grip Bench Press",
+        "target":  "Arms, Chest",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/311/close-grip-bench-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/311-1.jpg"
+    },
+    {
+        "id":  234,
+        "name":  "Cycled Split-Squat Jump",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/234/cycled-split-squat-jump/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/234-1.jpg"
+    },
+    {
+        "id":  371,
+        "name":  "Diagonal Raise",
+        "target":  "Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/371/diagonal-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/371-1.jpg"
+    },
+    {
+        "id":  18,
+        "name":  "Downward-facing Dog",
+        "target":  "Arms, Back, Butt/Hips, Full Body/Integrated, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/18/downward-facing-dog/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/18-1.jpg"
+    },
+    {
+        "id":  367,
+        "name":  "Elevated Glute Bridge",
+        "target":  "Butt/Hips",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/367/elevated-glute-bridge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/367-1.jpg"
+    },
+    {
+        "id":  359,
+        "name":  "Farmer\u0027s Carry",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/359/farmer-s-carry/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/359-1.jpg"
+    },
+    {
+        "id":  382,
+        "name":  "Figure Eight",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/382/figure-eight/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/382-1.jpg"
+    },
+    {
+        "id":  118,
+        "name":  "Forward Cone Jumps",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Cones",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/118/forward-cone-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/118-1.jpg"
+    },
+    {
+        "id":  175,
+        "name":  "Forward Linear Ladder Drill",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Ladder",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/175/forward-linear-ladder-drill/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/175-1.jpg"
+    },
+    {
+        "id":  8,
+        "name":  "Forward Lunge",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/8/forward-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/8-1.jpg"
+    },
+    {
+        "id":  94,
+        "name":  "Forward Lunge",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/94/forward-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/94-1.jpg"
+    },
+    {
+        "id":  32,
+        "name":  "Front Plank",
+        "target":  "Abs, Back",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/32/front-plank/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/32-1.jpg"
+    },
+    {
+        "id":  22,
+        "name":  "Front Squat",
+        "target":  "Back, Butt/Hips, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/22/front-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/22-1.jpg"
+    },
+    {
+        "id":  66,
+        "name":  "Glute Bridge",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/66/glute-bridge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/66-1.jpg"
+    },
+    {
+        "id":  145,
+        "name":  "Glute Bridge Single Leg Progression",
+        "target":  "Back, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/145/glute-bridge-single-leg-progression/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/145-1.jpg"
+    },
+    {
+        "id":  362,
+        "name":  "Goblet Squat",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/362/goblet-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/362-1.jpg"
+    },
+    {
+        "id":  381,
+        "name":  "Half Turkish Get-up",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/381/half-turkish-get-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/381-1.jpg"
+    },
+    {
+        "id":  10,
+        "name":  "Hammer Curl",
+        "target":  "Arms",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/10/hammer-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/10-1.jpg"
+    },
+    {
+        "id":  336,
+        "name":  "High Row",
+        "target":  "Back",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/336/high-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/336-1.jpg"
+    },
+    {
+        "id":  289,
+        "name":  "High-low Partner See-saw",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/289/high-low-partner-see-saw/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/289-1.jpg"
+    },
+    {
+        "id":  318,
+        "name":  "Hip Bridge",
+        "target":  "Butt/Hips",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/318/hip-bridge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/318-1.jpg"
+    },
+    {
+        "id":  110,
+        "name":  "Hip Rotations (Push-up Position)",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/110/hip-rotations-push-up-position/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/110-1.jpg"
+    },
+    {
+        "id":  176,
+        "name":  "Jump and Reach",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/176/jump-and-reach/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/176-1.jpg"
+    },
+    {
+        "id":  341,
+        "name":  "Kneeling Hay Baler",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/341/kneeling-hay-baler/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/341-1.jpg"
+    },
+    {
+        "id":  35,
+        "name":  "Kneeling Lat Pulldown",
+        "target":  "Back",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/35/kneeling-lat-pulldown/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/35-1.jpg"
+    },
+    {
+        "id":  128,
+        "name":  "Kneeling Reverse Fly",
+        "target":  "Back, Shoulders",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/128/kneeling-reverse-fly/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/128-1.jpg"
+    },
+    {
+        "id":  120,
+        "name":  "Lateral Cone Jumps",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Cones",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/120/lateral-cone-jumps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/120-1.jpg"
+    },
+    {
+        "id":  328,
+        "name":  "Lateral Crawls",
+        "target":  "Full Body/Integrated",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/328/lateral-crawls/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/328-1.jpg"
+    },
+    {
+        "id":  226,
+        "name":  "Lateral Hurdle Run",
+        "target":  "Full Body/Integrated, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "Hurdles",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/226/lateral-hurdle-run/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/226-1.jpg"
+    },
+    {
+        "id":  364,
+        "name":  "Lateral Lunge",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/364/lateral-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/364-1.jpg"
+    },
+    {
+        "id":  206,
+        "name":  "Lateral Over Unders",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment, Raised Platform/Box",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/206/lateral-over-unders/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/206-1.jpg"
+    },
+    {
+        "id":  363,
+        "name":  "Lunge",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/363/lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/363-1.jpg"
+    },
+    {
+        "id":  140,
+        "name":  "Lunge with Elbow Instep",
+        "target":  "Abs, Butt/Hips, Full Body/Integrated, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/140/lunge-with-elbow-instep/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/140-1.jpg"
+    },
+    {
+        "id":  36,
+        "name":  "Lying Barbell Triceps Extensions",
+        "target":  "Arms",
+        "equipment":  "Barbell, Bench",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/36/lying-barbell-triceps-extensions/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/36-1.jpg"
+    },
+    {
+        "id":  21,
+        "name":  "Lying Chest Fly",
+        "target":  "Chest, Shoulders",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/21/lying-chest-fly/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/21-1.jpg"
+    },
+    {
+        "id":  37,
+        "name":  "Lying Pullovers",
+        "target":  "Chest",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/37/lying-pullovers/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/37-1.jpg"
+    },
+    {
+        "id":  178,
+        "name":  "Overhead Medicine Ball Throws",
+        "target":  "Butt/Hips, Full Body/Integrated, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/178/overhead-medicine-ball-throws/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/178-1.jpg"
+    },
+    {
+        "id":  182,
+        "name":  "Overhead Slams",
+        "target":  "Back, Butt/Hips, Full Body/Integrated, Legs - Thighs, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/182/overhead-slams/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/182-1.jpg"
+    },
+    {
+        "id":  267,
+        "name":  "Partner Standing Row with Resistance Tubing",
+        "target":  "Arms, Back, Butt/Hips",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/267/partner-standing-row-with-resistance-tubing/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/267-1.jpg"
+    },
+    {
+        "id":  257,
+        "name":  "Plank with Knee Drag",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/257/plank-with-knee-drag/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/257-1.jpg"
+    },
+    {
+        "id":  320,
+        "name":  "Plank-ups",
+        "target":  "Abs, Arms, Chest",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/320/plank-ups/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/320-1.jpg"
+    },
+    {
+        "id":  249,
+        "name":  "Prone Scapular (Shoulder) Stabilization Series - I, Y, T, W, O Formation",
+        "target":  "Back, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/249/prone-scapular-shoulder-stabilization-series-i-y-t-w-o-formation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/249-1.jpg"
+    },
+    {
+        "id":  380,
+        "name":  "Pull-over Crunch",
+        "target":  "Abs",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/380/pull-over-crunch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/380-1.jpg"
+    },
+    {
+        "id":  191,
+        "name":  "Pull-ups",
+        "target":  "Arms, Back",
+        "equipment":  "Pull up bar",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/191/pull-ups/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/191-1.jpg"
+    },
+    {
+        "id":  41,
+        "name":  "Push-up",
+        "target":  "Arms, Chest, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/41/push-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/41-1.jpg"
+    },
+    {
+        "id":  310,
+        "name":  "Reverse Bicep Curl",
+        "target":  "Arms",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/310/reverse-bicep-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/310-1.jpg"
+    },
+    {
+        "id":  76,
+        "name":  "Reverse Ab Crunch",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/76/reverse-crunch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/76-1.jpg"
+    },
+    {
+        "id":  353,
+        "name":  "Reverse Fly",
+        "target":  "Back, Shoulders",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/353/reverse-fly/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/353-1.jpg"
+    },
+    {
+        "id":  319,
+        "name":  "Reverse Lunge",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/319/reverse-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/319-1.jpg"
+    },
+    {
+        "id":  218,
+        "name":  "Reverse Slam",
+        "target":  "Butt/Hips, Full Body/Integrated, Legs - Thighs, Shoulders",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/218/reverse-slam/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/218-1.jpg"
+    },
+    {
+        "id":  317,
+        "name":  "Romanian Deadlift",
+        "target":  "Back, Butt/Hips, Legs - Thighs",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/317/romanian-deadlift/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/317-1.jpg"
+    },
+    {
+        "id":  369,
+        "name":  "Rotational Uppercut",
+        "target":  "Arms, Full Body/Integrated, Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/369/rotational-uppercut/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/369-1.jpg"
+    },
+    {
+        "id":  45,
+        "name":  "Seated Overhead Press",
+        "target":  "Arms, Shoulders",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/45/seated-overhead-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/45-1.jpg"
+    },
+    {
+        "id":  43,
+        "name":  "Seated Shoulder Press",
+        "target":  "Arms, Shoulders",
+        "equipment":  "Barbell, Bench",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/43/seated-shoulder-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/43-1.jpg"
+    },
+    {
+        "id":  215,
+        "name":  "Seated Straddle with Side Reaches",
+        "target":  "Abs, Back, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/215/seated-straddle-with-side-reaches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/215-1.jpg"
+    },
+    {
+        "id":  237,
+        "name":  "Shoulder Stability-Mobility Series - I, Y, T, W Formations",
+        "target":  "Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/237/shoulder-stability-mobility-series-i-y-t-w-formations/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/237-1.jpg"
+    },
+    {
+        "id":  72,
+        "name":  "Shrug",
+        "target":  "Back",
+        "equipment":  "Barbell",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/72/shrug/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/72-1.jpg"
+    },
+    {
+        "id":  50,
+        "name":  "Side Lunge",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/50/side-lunge/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/50-1.jpg"
+    },
+    {
+        "id":  303,
+        "name":  "Side Plank",
+        "target":  "Abs",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/303/side-plank/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/303-1.jpg"
+    },
+    {
+        "id":  101,
+        "name":  "Side Plank with Straight Leg",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/101/side-plank-with-straight-leg/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/101-1.jpg"
+    },
+    {
+        "id":  395,
+        "name":  "Single Arm Overhead Press",
+        "target":  "Full Body/Integrated, Shoulders",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/395/single-arm-overhead-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/395-1.jpg"
+    },
+    {
+        "id":  321,
+        "name":  "Single Arm Plank",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/321/single-arm-plank/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/321-1.jpg"
+    },
+    {
+        "id":  337,
+        "name":  "Single Arm Row",
+        "target":  "Back",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/337/single-arm-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/337-1.jpg"
+    },
+    {
+        "id":  136,
+        "name":  "Single Leg Squat",
+        "target":  "Butt/Hips, Legs - Calves and Shins, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/136/single-leg-squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/136-1.jpg"
+    },
+    {
+        "id":  338,
+        "name":  "Single-arm Chest Press",
+        "target":  "Chest",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/338/single-arm-chest-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/338-1.jpg"
+    },
+    {
+        "id":  126,
+        "name":  "Single-arm Row",
+        "target":  "Back",
+        "equipment":  "Bench, Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/126/single-arm-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/126-1.jpg"
+    },
+    {
+        "id":  247,
+        "name":  "Spider Walks",
+        "target":  "Arms, Full Body/Integrated",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/247/spider-walks/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/247-1.jpg"
+    },
+    {
+        "id":  250,
+        "name":  "Sprinter Pulls",
+        "target":  "Full Body/Integrated",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/250/sprinter-pulls/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/250-1.jpg"
+    },
+    {
+        "id":  288,
+        "name":  "Squat",
+        "target":  "Butt/Hips",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/288/squat/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/288-1.jpg"
+    },
+    {
+        "id":  361,
+        "name":  "Squat to Overhead Raise",
+        "target":  "Abs, Full Body/Integrated, Legs - Thighs, Shoulders",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/361/squat-to-overhead-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/361-1.jpg"
+    },
+    {
+        "id":  344,
+        "name":  "Squat to Row",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/344/squat-to-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/344-1.jpg"
+    },
+    {
+        "id":  59,
+        "name":  "Stability Ball Hamstring Curl",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/59/stability-ball-hamstring-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/59-1.jpg"
+    },
+    {
+        "id":  62,
+        "name":  "Stability Ball Prone Walkout",
+        "target":  "Abs, Back",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/62/stability-ball-prone-walkout/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/62-1.jpg"
+    },
+    {
+        "id":  63,
+        "name":  "Stability Ball Push-Up",
+        "target":  "Chest, Shoulders",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/63/stability-ball-push-up/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/63-1.jpg"
+    },
+    {
+        "id":  67,
+        "name":  "Stability Ball Shoulder Stabilization",
+        "target":  "Back, Shoulders",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/67/stability-ball-shoulder-stabilization/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/67-1.jpg"
+    },
+    {
+        "id":  224,
+        "name":  "Standing Ankle Mobilization",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/224/standing-ankle-mobilization/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/224-1.jpg"
+    },
+    {
+        "id":  332,
+        "name":  "Standing Anti-rotation Press",
+        "target":  "Abs, Arms, Chest",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/332/standing-anti-rotation-press/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/332-1.jpg"
+    },
+    {
+        "id":  160,
+        "name":  "Standing Chest Fly",
+        "target":  "Chest",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/160/standing-chest-fly/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/160-1.jpg"
+    },
+    {
+        "id":  161,
+        "name":  "Standing Decline Cable Flyes",
+        "target":  "Chest",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/161/standing-decline-cable-flyes/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/161-1.jpg"
+    },
+    {
+        "id":  201,
+        "name":  "Standing Gate Openers (Frankensteins)",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/201/standing-gate-openers-frankensteins/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/201-1.jpg"
+    },
+    {
+        "id":  132,
+        "name":  "Standing Hamstrings Curl",
+        "target":  "Abs, Legs - Thighs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/132/standing-hamstrings-curl/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/132-1.jpg"
+    },
+    {
+        "id":  155,
+        "name":  "Standing Hip Abduction",
+        "target":  "Abs, Butt/Hips, Full Body/Integrated",
+        "equipment":  "Resistance Bands/Cables, Weight Machines / Selectorized",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/155/standing-hip-abduction/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/155-1.jpg"
+    },
+    {
+        "id":  104,
+        "name":  "Standing Hip Adduction",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/104/standing-hip-adduction/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/104-1.jpg"
+    },
+    {
+        "id":  163,
+        "name":  "Standing Incline Cable Flyes",
+        "target":  "Chest",
+        "equipment":  "Weight Machines / Selectorized",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/163/standing-incline-cable-flyes/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/163-1.jpg"
+    },
+    {
+        "id":  133,
+        "name":  "Standing Leg Extension",
+        "target":  "Abs, Legs - Thighs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/133/standing-leg-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/133-1.jpg"
+    },
+    {
+        "id":  335,
+        "name":  "Standing Row",
+        "target":  "Back",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/335/standing-row/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/335-1.jpg"
+    },
+    {
+        "id":  75,
+        "name":  "Standing Shrug",
+        "target":  "Back",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/75/standing-shrug/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/75-1.jpg"
+    },
+    {
+        "id":  225,
+        "name":  "Standing Triangle Straddle Bends",
+        "target":  "Back, Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/225/standing-triangle-straddle-bends/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/225-1.jpg"
+    },
+    {
+        "id":  102,
+        "name":  "Standing Trunk Rotation",
+        "target":  "Abs",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/102/standing-trunk-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/102-1.jpg"
+    },
+    {
+        "id":  106,
+        "name":  "Standing Trunk Rotation",
+        "target":  "Abs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/106/standing-trunk-rotation/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/106-1.jpg"
+    },
+    {
+        "id":  211,
+        "name":  "Step Stretch",
+        "target":  "Legs - Calves and Shins",
+        "equipment":  "Raised Platform/Box",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/211/step-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/211-1.jpg"
+    },
+    {
+        "id":  334,
+        "name":  "Straight Arm Pressdown",
+        "target":  "Back",
+        "equipment":  "Resistance Bands/Cables",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/334/straight-arm-pressdown/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/334-1.jpg"
+    },
+    {
+        "id":  358,
+        "name":  "Suitcase Carry",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/358/suitcase-carry/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/358-1.jpg"
+    },
+    {
+        "id":  389,
+        "name":  "Suitcase Carry",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/389/suitcase-carry/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/389-1.jpg"
+    },
+    {
+        "id":  129,
+        "name":  "Sumo Rotational Squats",
+        "target":  "Butt/Hips, Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/129/sumo-rotational-squats/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/129-1.jpg"
+    },
+    {
+        "id":  241,
+        "name":  "Supine Bicycle Crunches",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/241/supine-bicycle-crunches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/241-1.jpg"
+    },
+    {
+        "id":  232,
+        "name":  "Supine IT Band Stretch",
+        "target":  "Legs - Thighs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/232/supine-it-band-stretch/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/232-1.jpg"
+    },
+    {
+        "id":  296,
+        "name":  "Supine Shoulder Roll",
+        "target":  "Abs, Butt/Hips",
+        "equipment":  "Stability Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/296/supine-shoulder-roll/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/296-1.jpg"
+    },
+    {
+        "id":  229,
+        "name":  "Supine Spinal Twist with Rib Grab and Progressions",
+        "target":  "Abs, Back, Chest, Shoulders",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/229/supine-spinal-twist-with-rib-grab-and-progressions/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/229-1.jpg"
+    },
+    {
+        "id":  391,
+        "name":  "Swing",
+        "target":  "Full Body/Integrated",
+        "equipment":  "Kettlebells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/391/swing/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/391-1.jpg"
+    },
+    {
+        "id":  307,
+        "name":  "Toe Taps",
+        "target":  "Full Body/Integrated",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/307/toe-taps/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/307-1.jpg"
+    },
+    {
+        "id":  74,
+        "name":  "Triceps Extension",
+        "target":  "Arms",
+        "equipment":  "Dumbbells",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/74/triceps-extension/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/74-1.jpg"
+    },
+    {
+        "id":  82,
+        "name":  "TRX Assisted Cross-over Lunge with Arm Raise",
+        "target":  "Back, Butt/Hips, Shoulders",
+        "equipment":  "TRX",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/82/trx-reg-assisted-cross-over-lunge-with-arm-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/82-1.jpg"
+    },
+    {
+        "id":  83,
+        "name":  "TRX Assisted Side Lunge with Arm Raise",
+        "target":  "Back, Butt/Hips, Full Body/Integrated, Legs - Calves and Shins, Shoulders",
+        "equipment":  "TRX",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/83/trx-reg-assisted-side-lunge-with-arm-raise/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/83-1.jpg"
+    },
+    {
+        "id":  180,
+        "name":  "Tuck Jump",
+        "target":  "Butt/Hips",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/180/tuck-jump/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/180-1.jpg"
+    },
+    {
+        "id":  305,
+        "name":  "V-twist",
+        "target":  "Abs",
+        "equipment":  "BOSU Trainer",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/305/v-twist/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/305-1.jpg"
+    },
+    {
+        "id":  242,
+        "name":  "V-ups",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/242/v-ups/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/242-1.jpg"
+    },
+    {
+        "id":  243,
+        "name":  "Vertical Toe Touches",
+        "target":  "Abs",
+        "equipment":  "No Equipment",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/243/vertical-toe-touches/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/243-1.jpg"
+    },
+    {
+        "id":  139,
+        "name":  "Walking Lunges with Twists",
+        "target":  "Abs, Butt/Hips, Legs - Thighs",
+        "equipment":  "Medicine Ball",
+        "difficulty":  "Intermediate",
+        "url":  "https://www.acefitness.org/resources/everyone/exercise-library/139/walking-lunges-with-twists/",
+        "imageUrl":  "https://ik.imagekit.io/02fmeo4exvw/exercise-library/large/139-1.jpg"
+    }
+]

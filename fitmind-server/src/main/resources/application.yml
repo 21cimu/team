@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: fitmind-server
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+ai:
+  deepseek:
+    api-url: ${AI_API_URL:https://api.deepseek.com/v1}
+    api-key: ${AI_API_KEY}
+  qwen:
+    api-url: ${QWEN_API_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+    api-key: ${QWEN_API_KEY}
+    vision-model: ${QWEN_VISION_MODEL:qwen3.6-plus}
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:86400000}

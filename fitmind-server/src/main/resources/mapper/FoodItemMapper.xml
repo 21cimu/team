@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fitmind.module.food.mapper.FoodItemMapper">
+
+    <select id="searchByName" resultType="com.fitmind.module.food.entity.FoodItem">
+        SELECT * FROM food_item
+        WHERE name LIKE CONCAT('%', #{keyword}, '%')
+           OR name_en LIKE CONCAT('%', #{keyword}, '%')
+        LIMIT 20
+    </select>
+
+    <select id="findCommonFoods" resultType="com.fitmind.module.food.entity.FoodItem">
+        SELECT * FROM food_item
+        ORDER BY id DESC
+        LIMIT 20
+    </select>
+
+</mapper>

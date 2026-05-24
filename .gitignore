@@ -1,0 +1,16 @@
+.idea/
+.vscode/
+.antigravitycli/
+.gemini/
+
+*.log
+*.tmp
+*.temp
+
+fitmind-web/node_modules/
+fitmind-web/dist/
+fitmind-web/dist-ssr/
+fitmind-web/tmp/
+fitmind-web/.env.local
+
+fitmind-server/target/

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitMind - 真实 3D 肌肉模型加载器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #111827; color: #fff; font-family: ui-sans-serif, system-ui, sans-serif; }
+        #canvas-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; display: flex; justify-content: space-between;}
+        .pointer-events-auto { pointer-events: auto; }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+    </style>
+    <!-- 引入 Vue 3 和 Three.js 及其扩展 -->
+    <script type="importmap">
+        {
+            "imports": {
+                "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- 3D 渲染区域 -->
+    <div id="canvas-container"></div>
+
+    <!-- Vue UI 控制层 -->
+    <div id="ui-layer">
+        
+        <!-- 左侧：项目介绍与动作模拟 -->
+        <div class="w-80 bg-gray-900/90 backdrop-blur-md border-r border-gray-700 p-6 flex flex-col h-full pointer-events-auto shadow-2xl overflow-y-auto">
+            <div class="mb-4">
+                <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-500 mb-2">FitMind</h1>
+                <p class="text-xs text-gray-400">真实 GLB 模型加载与交互引擎</p>
+            </div>
+
+            <div v-if="!modelLoaded" class="flex-1 flex flex-col items-center justify-center text-center opacity-70">
+                <svg class="w-12 h-12 mb-4 text-gray-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                <p class="text-sm text-gray-300">请先在右侧上传 .glb 模型</p>
+                <p class="text-xs text-gray-500 mt-2">推荐使用包含独立肌肉网格的模型</p>
+            </div>
+
+            <div v-else class="flex-1 flex flex-col">
+                <h2 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-2 border-b border-gray-700 pb-2">十种经典训练动作</h2>
+                <p class="text-[10px] text-gray-400 mb-3 leading-tight">如果点击后没有高亮，说明你上传的模型中没有预设的英文节点名称。请参考右侧列表修改节点名字。</p>
+                
+                <!-- 错误提示区域 (如果找不到对应的网格，会在这里显示) -->
+                <div v-if="missingNodes.length > 0" class="mb-4 p-3 bg-red-900/30 border border-red-800 rounded-md">
+                    <p class="text-xs text-red-400 font-bold mb-1">⚠️ 部分肌肉未完全匹配</p>
+                    <p class="text-[10px] text-red-300">由于您的模型命名规范不同，未能模糊匹配到以下词根：</p>
+                    <p class="text-[10px] text-gray-300 font-mono mt-1">{{ missingNodes.join(', ') }}</p>
+                    <p class="text-[10px] text-gray-400 mt-2">👉 解决办法：在右侧列表查看真实的节点名（如 Pectoralis_Major），将其替换到左侧代码里。</p>
+                </div>
+
+                <!-- 预设动作测试 -->
+                <div class="space-y-2 mb-6 overflow-y-auto flex-1 pr-1">
+                    <button 
+                        v-for="(exercise, index) in exercises" 
+                        :key="index"
+                        @click="simulateBackendRequest(exercise)"
+                        class="w-full text-left px-3 py-2 rounded-lg border transition-all duration-300 group relative overflow-hidden"
+                        :class="currentExercise === exercise.name ? 'bg-teal-500/20 border-teal-500 text-teal-300' : 'bg-gray-800 border-gray-700 hover:border-gray-500 text-gray-300'"
+                    >
+                        <div class="font-medium text-sm relative z-10">{{ index + 1 }}. {{ exercise.name }}</div>
+                        <div class="text-[10px] mt-1 opacity-80 text-teal-100 relative z-10">{{ exercise.desc }}</div>
+                        <div class="text-[9px] mt-0.5 opacity-50 font-mono relative z-10 truncate">尝试寻找: {{ exercise.targetMuscles.join(', ') }}</div>
+                    </button>
+                </div>
+
+                <div class="pt-4 border-t border-gray-700 mt-auto">
+                    <button @click="resetMuscles" class="w-full py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded text-sm text-gray-300 transition-colors">
+                        恢复模型原色
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧：模型上传与节点探索器 (Mesh Explorer) -->
+        <div class="w-72 bg-gray-900/90 backdrop-blur-md border-l border-gray-700 flex flex-col h-full pointer-events-auto shadow-2xl">
+            <!-- 上传区域 -->
+            <div class="p-4 border-b border-gray-700 bg-gray-800/50">
+                <label class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wider">上传你的 3D 模型 (.glb)</label>
+                <div class="relative flex items-center justify-center w-full">
+                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-700/50 hover:bg-gray-700 hover:border-teal-500 transition-all">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6 px-2 text-center">
+                            <p class="text-sm text-gray-300 font-medium"><span class="text-teal-400">点击上传</span> 或拖拽</p>
+                            <p class="text-[10px] text-gray-500 mt-1 leading-tight">纯本地解析，保护数据隐私</p>
+                        </div>
+                        <input id="dropzone-file" type="file" class="hidden" accept=".glb,.gltf" @change="handleFileUpload" />
+                    </label>
+                </div>
+            </div>
+
+            <!-- 节点列表 -->
+            <div class="flex-1 flex flex-col overflow-hidden p-4">
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 flex justify-between items-center">
+                    <span>解析出的网格节点 ({{ discoveredMeshes.length }})</span>
+                </h2>
+                <p v-if="discoveredMeshes.length === 0" class="text-xs text-gray-500 italic">等待模型加载...</p>
+                <p v-else class="text-[10px] text-teal-400 mb-2">点击下方节点即可单独测试高亮</p>
+                
+                <div class="overflow-y-auto flex-1 pr-2 space-y-1">
+                    <button 
+                        v-for="meshName in discoveredMeshes" 
+                        :key="meshName"
+                        @click="testSingleMesh(meshName)"
+                        class="w-full text-left px-3 py-2 rounded text-[11px] font-mono bg-gray-800 hover:bg-teal-900/50 hover:text-teal-300 border border-transparent hover:border-teal-700 truncate transition-colors"
+                        title="点击单独测试高亮此网格"
+                    >
+                        <span class="opacity-50 mr-1">📦</span>{{ meshName }}
+                    </button>
+                </div>
+            </div>
+            
+            <div v-if="loading" class="absolute inset-0 bg-gray-900/80 backdrop-blur flex items-center justify-center z-50">
+                <div class="text-center">
+                    <div class="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+                    <p class="text-teal-400 text-sm font-medium animate-pulse">正在解码 Draco 压缩模型...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { createApp, ref, onMounted } from 'vue';
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+        import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
+        // --- Three.js 核心 ---
+        let scene, camera, renderer, controls;
+        let currentModel = null;
+        const muscleMeshes = {}; // { meshName: THREE.Mesh }
+        
+        const HIGHLIGHT_COLOR = 0xff2222; // 红色充血状态
+        const EMISSIVE_COLOR = 0x660000;  // 发红光
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x111827, 0.02);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 1.5, 4); 
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.0;
+            container.appendChild(renderer.domElement);
+
+            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+            
+            const mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            mainLight.position.set(5, 10, 7);
+            scene.add(mainLight);
+
+            const fillLight = new THREE.DirectionalLight(0xe2e8f0, 0.8);
+            fillLight.position.set(-5, 3, -5);
+            scene.add(fillLight);
+
+            const gridHelper = new THREE.GridHelper(10, 20, 0x4fd1c5, 0x374151);
+            gridHelper.position.y = -0.01;
+            scene.add(gridHelper);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.target.set(0, 1, 0);
+
+            window.addEventListener('resize', onWindowResize);
+            animate();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        window._loadRealModel = (url, onProgress, onLoadSuccess, onError) => {
+            if (currentModel) {
+                scene.remove(currentModel);
+                Object.keys(muscleMeshes).forEach(k => delete muscleMeshes[k]);
+            }
+
+            const loader = new GLTFLoader();
+            const dracoLoader = new DRACOLoader();
+            dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+            loader.setDRACOLoader(dracoLoader);
+
+            loader.load(url, (gltf) => {
+                const model = gltf.scene;
+                const detectedMeshes = [];
+
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const scale = 2.5 / maxDim;
+                
+                model.scale.set(scale, scale, scale);
+                model.position.sub(center.multiplyScalar(scale));
+                model.position.y += (size.y * scale) / 2;
+
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        detectedMeshes.push(child.name);
+                        
+                        if (child.material) {
+                            if (Array.isArray(child.material)) {
+                                child.material = child.material.map(m => m.clone());
+                            } else {
+                                child.material = child.material.clone();
+                            }
+                        }
+
+                        const mat = Array.isArray(child.material) ? child.material[0] : child.material;
+                        if (mat) {
+                            child.userData.originalColor = mat.color ? mat.color.clone() : new THREE.Color(0xffffff);
+                            child.userData.originalEmissive = mat.emissive ? mat.emissive.clone() : new THREE.Color(0x000000);
+                        }
+                        
+                        muscleMeshes[child.name] = child;
+                    }
+                });
+
+                currentModel = model;
+                scene.add(model);
+                onLoadSuccess(detectedMeshes);
+            }, undefined, onError);
+        };
+
+        window._resetMuscles = () => {
+            Object.values(muscleMeshes).forEach(mesh => {
+                const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+                materials.forEach(mat => {
+                    if(mat.color && mesh.userData.originalColor) mat.color.copy(mesh.userData.originalColor);
+                    if(mat.emissive && mesh.userData.originalEmissive) mat.emissive.copy(mesh.userData.originalEmissive);
+                });
+            });
+        };
+
+        // 核心高亮函数，升级为【模糊匹配引擎】，解决高精度模型网格过细的问题
+        window._highlightMuscles = (keywordsArray) => {
+            window._resetMuscles(); 
+            
+            // 将所有要搜索的关键词转为小写
+            const lowerKeywords = keywordsArray.map(k => k.toLowerCase());
+            const unmatchedKeywords = new Set(lowerKeywords);
+            
+            // 遍历模型中的所有网格名称
+            Object.keys(muscleMeshes).forEach(meshName => {
+                const lowerMeshName = meshName.toLowerCase();
+                let isMatch = false;
+
+                // 只要网格名称包含任意一个关键词词根，就判定为匹配该肌群
+                lowerKeywords.forEach(keyword => {
+                    if (lowerMeshName.includes(keyword)) {
+                        isMatch = true;
+                        unmatchedKeywords.delete(keyword); // 该关键词成功匹配到了至少一个细分网格
+                    }
+                });
+
+                // 如果匹配成功，高亮该网格（无论是左边、右边，还是细分纤维）
+                if (isMatch) {
+                    const mesh = muscleMeshes[meshName];
+                    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+                    materials.forEach(mat => {
+                        if(mat.color) mat.color.setHex(HIGHLIGHT_COLOR);
+                        if(mat.emissive) mat.emissive.setHex(EMISSIVE_COLOR);
+                    });
+                }
+            });
+            
+            return Array.from(unmatchedKeywords); // 返回完全没找到对应部位的关键词
+        };
+
+        // --- Vue 3 UI 逻辑 ---
+        const app = createApp({
+            setup() {
+                const currentExercise = ref(null);
+                const loading = ref(false);
+                const modelLoaded = ref(false);
+                const discoveredMeshes = ref([]); 
+                const missingNodes = ref([]); // 记录当前动作找不到的节点
+
+                // 核心：十种经典动作及大致对应的肌肉英文全称（升级为医学解剖学关键词模糊匹配）
+                // 使用解剖学词根（如 pectoralis, latissimus），匹配精细模型中的所有纤维分支
+                const exercises = ref([
+                    { name: '杠铃卧推', desc: '主要锻炼胸大肌、肱三头肌', targetMuscles: ['pectoralis', 'chest', 'triceps'] },
+                    { name: '俯卧撑', desc: '主要锻炼胸肌、三角肌前束、三头肌', targetMuscles: ['pectoralis', 'chest', 'deltoid', 'triceps'] },
+                    { name: '深蹲', desc: '主要锻炼大腿股四头肌、臀大肌', targetMuscles: ['gluteus', 'quadriceps', 'vastus', 'rectus_femoris'] },
+                    { name: '引体向上', desc: '主要锻炼背阔肌、肱二头肌', targetMuscles: ['latissimus', 'lats', 'biceps'] },
+                    { name: '硬拉', desc: '锻炼腘绳肌、臀大肌、下背部', targetMuscles: ['hamstring', 'biceps_femoris', 'gluteus', 'erector_spinae'] },
+                    { name: '哑铃推举', desc: '锻炼肩部三角肌、三头肌', targetMuscles: ['deltoid', 'shoulder', 'triceps'] },
+                    { name: '杠铃划船', desc: '锻炼背阔肌、斜方肌、菱形肌', targetMuscles: ['latissimus', 'trapezius', 'rhomboid'] },
+                    { name: '哑铃弯举', desc: '专门强化肱二头肌', targetMuscles: ['biceps', 'brachialis'] },
+                    { name: '卷腹', desc: '锻炼核心腹直肌', targetMuscles: ['rectus_abdominis', 'abdominals', 'abs'] },
+                    { name: '提踵', desc: '锻炼小腿腓肠肌、比目鱼肌', targetMuscles: ['gastrocnemius', 'soleus', 'calf'] }
+                ]);
+
+                onMounted(() => {
+                    initThreeJS();
+                });
+
+                const handleFileUpload = (event) => {
+                    const file = event.target.files[0];
+                    if (!file) return;
+
+                    loading.value = true;
+                    missingNodes.value = [];
+                    currentExercise.value = null;
+                    const url = URL.createObjectURL(file);
+                    
+                    window._loadRealModel(
+                        url,
+                        undefined,
+                        (meshes) => {
+                            discoveredMeshes.value = meshes;
+                            modelLoaded.value = true;
+                            loading.value = false;
+                        },
+                        (error) => {
+                            console.error("模型加载失败", error);
+                            alert("模型解析失败，请确保您上传的是标准的 .glb 或 .gltf 文件。");
+                            loading.value = false;
+                        }
+                    );
+                };
+
+                const testSingleMesh = (meshName) => {
+                    currentExercise.value = null; 
+                    missingNodes.value = [];
+                    window._highlightMuscles([meshName]);
+                };
+
+                const simulateBackendRequest = (exercise) => {
+                    currentExercise.value = exercise.name;
+                    missingNodes.value = [];
+                    // 执行高亮，并获取没找到的节点名单
+                    const missing = window._highlightMuscles(exercise.targetMuscles);
+                    
+                    // 如果存在没找到的节点，在界面上提示用户
+                    if (missing.length > 0) {
+                        missingNodes.value = missing;
+                    }
+                };
+
+                const resetMuscles = () => {
+                    currentExercise.value = null;
+                    missingNodes.value = [];
+                    window._resetMuscles();
+                };
+
+                return {
+                    currentExercise,
+                    exercises,
+                    loading,
+                    modelLoaded,
+                    discoveredMeshes,
+                    missingNodes,
+                    handleFileUpload,
+                    testSingleMesh,
+                    simulateBackendRequest,
+                    resetMuscles
+                };
+            }
+        });
+
+        app.mount('#ui-layer');
+    </script>
+</body>
+</html>
