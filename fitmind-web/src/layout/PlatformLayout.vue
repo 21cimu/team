@@ -637,6 +637,7 @@ const pageComponentLoaders: Record<string, () => Promise<any>> = {
   '/app/achievements': () => import('../views/Achievements.vue'),
   '/app/leaderboard': () => import('../views/Leaderboard.vue'),
   '/app/food-recognition': () => import('../views/FoodRecognition.vue'),
+  '/app/action-analysis': () => import('../views/ActionAnalysis.vue'),
   '/app/admin': () => import('../views/admin/AdminPanel.vue')
 }
 
@@ -3583,4 +3584,3 @@ onUnmounted(() => {
 }
 
 </style>
-

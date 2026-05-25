@@ -59,7 +59,7 @@ class CommunityControllerTest {
         SysUser mockUser = new SysUser();
         mockUser.setId(1L);
         mockUser.setUsername("testuser");
-        when(sysUserMapper.selectOne(any(LambdaQueryWrapper.class))).thenReturn(mockUser);
+        lenient().when(sysUserMapper.selectOne(any(LambdaQueryWrapper.class))).thenReturn(mockUser);
 
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken("testuser", null));

@@ -31,6 +31,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class AchievementServiceImpl extends ServiceImpl<AchievementMapper, Achievement> implements IAchievementService {
 
+    private final AchievementMapper achievementMapper;
     private final UserAchievementMapper userAchievementMapper;
     private final AiTrainingPlanMapper aiTrainingPlanMapper;
     private final AiDietPlanMapper aiDietPlanMapper;
@@ -40,10 +41,11 @@ public class AchievementServiceImpl extends ServiceImpl<AchievementMapper, Achie
 
     @Override
     public List<Map<String, Object>> getUserAchievements(Long userId) {
-        List<Achievement> allAchievements = this.list(new LambdaQueryWrapper<Achievement>().orderByAsc(Achievement::getSortOrder));
+        List<Achievement> allAchievements = defaultIfNull(achievementMapper.selectList(
+                new LambdaQueryWrapper<Achievement>().orderByAsc(Achievement::getSortOrder)));
 
-        List<UserAchievement> userAchievements = userAchievementMapper.selectList(
-                new LambdaQueryWrapper<UserAchievement>().eq(UserAchievement::getUserId, userId));
+        List<UserAchievement> userAchievements = defaultIfNull(userAchievementMapper.selectList(
+                new LambdaQueryWrapper<UserAchievement>().eq(UserAchievement::getUserId, userId)));
 
         Map<Long, UserAchievement> userAchievementMap = new HashMap<>();
         for (UserAchievement ua : userAchievements) {
@@ -98,7 +100,7 @@ public class AchievementServiceImpl extends ServiceImpl<AchievementMapper, Achie
         int totalLikes = calculateTotalPostLikes(userId);
         int socialCoreProgress = calculateSocialCoreProgress(userId);
 
-        List<Achievement> allAchievements = this.list();
+        List<Achievement> allAchievements = defaultIfNull(achievementMapper.selectList(new LambdaQueryWrapper<>()));
         for (Achievement ach : allAchievements) {
             int progress = calculateProgress(
                     ach,
@@ -185,26 +187,26 @@ public class AchievementServiceImpl extends ServiceImpl<AchievementMapper, Achie
     }
 
     private int calculateLongestTrainingStreak(Long userId) {
-        List<AiTrainingPlan> completedPlans = aiTrainingPlanMapper.selectList(
+        List<AiTrainingPlan> completedPlans = defaultIfNull(aiTrainingPlanMapper.selectList(
                 new LambdaQueryWrapper<AiTrainingPlan>()
                         .eq(AiTrainingPlan::getUserId, userId)
                         .eq(AiTrainingPlan::getStatus, 1)
-                        .orderByAsc(AiTrainingPlan::getPlanDate));
+                        .orderByAsc(AiTrainingPlan::getPlanDate)));
         return calculateLongestConsecutiveDays(extractPlanDates(completedPlans));
     }
 
     private int calculateLongestDietStreak(Long userId) {
-        List<com.fitmind.module.diet.entity.AiDietPlan> completedPlans = aiDietPlanMapper.selectList(
+        List<com.fitmind.module.diet.entity.AiDietPlan> completedPlans = defaultIfNull(aiDietPlanMapper.selectList(
                 new LambdaQueryWrapper<com.fitmind.module.diet.entity.AiDietPlan>()
                         .eq(com.fitmind.module.diet.entity.AiDietPlan::getUserId, userId)
                         .eq(com.fitmind.module.diet.entity.AiDietPlan::getStatus, 1)
-                        .orderByAsc(com.fitmind.module.diet.entity.AiDietPlan::getPlanDate));
+                        .orderByAsc(com.fitmind.module.diet.entity.AiDietPlan::getPlanDate)));
         return calculateLongestConsecutiveDays(extractDietDates(completedPlans));
     }
 
     private int calculateTotalPostLikes(Long userId) {
-        List<CommunityPost> posts = communityPostMapper.selectList(
-                new LambdaQueryWrapper<CommunityPost>().eq(CommunityPost::getUserId, userId));
+        List<CommunityPost> posts = defaultIfNull(communityPostMapper.selectList(
+                new LambdaQueryWrapper<CommunityPost>().eq(CommunityPost::getUserId, userId)));
         return posts.stream()
                 .map(CommunityPost::getLikes)
                 .filter(likes -> likes != null && likes > 0)
@@ -264,5 +266,9 @@ public class AchievementServiceImpl extends ServiceImpl<AchievementMapper, Achie
         }
 
         return longest;
+    }
+
+    private <T> List<T> defaultIfNull(List<T> items) {
+        return items != null ? items : List.of();
     }
 }

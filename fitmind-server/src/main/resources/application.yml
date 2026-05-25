@@ -3,6 +3,10 @@ spring:
     active: dev
   application:
     name: fitmind-server
+  servlet:
+    multipart:
+      max-file-size: ${MULTIPART_MAX_FILE_SIZE:200MB}
+      max-request-size: ${MULTIPART_MAX_REQUEST_SIZE:200MB}
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
@@ -28,3 +32,12 @@ ai:
 jwt:
   secret: ${JWT_SECRET}
   expiration: ${JWT_EXPIRATION:86400000}
+
+fitness-vision:
+  python-executable: ${FITNESS_VISION_PYTHON:python}
+  script-path: ${FITNESS_VISION_SCRIPT:../Fitness model/infer_action_json.py}
+  model-path: ${FITNESS_VISION_MODEL:../Fitness model/trained_models/best_model.pth}
+  class-mapping-path: ${FITNESS_VISION_CLASS_MAPPING:../Fitness model/processed_data/class_mapping.json}
+  working-directory: ${FITNESS_VISION_WORKDIR:../Fitness model}
+  upload-dir: ${FITNESS_VISION_UPLOAD_DIR:./uploads/fitness-vision}
+  timeout-seconds: ${FITNESS_VISION_TIMEOUT_SECONDS:180}

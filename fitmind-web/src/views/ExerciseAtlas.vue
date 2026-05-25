@@ -368,6 +368,9 @@ onUnmounted(() => {
       </div>
       <div class="header-right">
         <span class="text-caption text-secondary">操作员: {{ username }}</span>
+        <button class="nd-btn" @click="router.push('/app/action-analysis')" style="font-size: 12px; padding: 6px 16px;">
+          动作识别
+        </button>
         <button class="nd-btn" @click="handleReset" :disabled="!modelLoaded" style="font-size: 12px; padding: 6px 16px;">
           ↺ 重置
         </button>

@@ -98,6 +98,15 @@ const routes = [
         }
       },
       {
+        path: 'action-analysis',
+        component: () => import('../views/ActionAnalysis.vue'),
+        meta: {
+          title: '动作识别',
+          section: '核心',
+          description: '上传训练视频，获取动作类别、视觉评分和纠正建议。'
+        }
+      },
+      {
         path: 'profile',
         component: () => import('../views/user/Profile.vue'),
         meta: {

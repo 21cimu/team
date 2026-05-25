@@ -2,14 +2,19 @@ package com.fitmind.module.exercise.controller;
 
 import com.fitmind.common.api.Result;
 import com.fitmind.module.exercise.data.AceExerciseCatalog;
+import com.fitmind.module.exercise.dto.ExerciseActionAnalysisResponse;
 import com.fitmind.module.exercise.entity.Exercise;
+import com.fitmind.module.exercise.service.IExerciseActionAnalysisService;
 import com.fitmind.module.exercise.service.IExerciseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +29,7 @@ import java.util.Map;
 public class ExerciseController {
 
     private final IExerciseService exerciseService;
+    private final IExerciseActionAnalysisService exerciseActionAnalysisService;
 
     @GetMapping("/list")
     public Result<List<Map<String, Object>>> getExercises(
@@ -58,6 +64,17 @@ public class ExerciseController {
             return Result.success(toMap(enrichWithAceCatalog(exercise)));
         } catch (Exception e) {
             return Result.error(e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/analyze", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Result<ExerciseActionAnalysisResponse> analyzeExerciseAction(@RequestParam("file") MultipartFile file) {
+        try {
+            return Result.success(exerciseActionAnalysisService.analyzeVideo(file));
+        } catch (IllegalArgumentException e) {
+            return Result.error(400, e.getMessage());
+        } catch (Exception e) {
+            return Result.error("动作识别失败: " + e.getMessage());
         }
     }
 

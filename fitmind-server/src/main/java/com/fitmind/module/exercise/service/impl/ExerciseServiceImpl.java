@@ -5,12 +5,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fitmind.module.exercise.entity.Exercise;
 import com.fitmind.module.exercise.mapper.ExerciseMapper;
 import com.fitmind.module.exercise.service.IExerciseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ExerciseServiceImpl extends ServiceImpl<ExerciseMapper, Exercise> implements IExerciseService {
+
+    private final ExerciseMapper exerciseMapper;
 
     @Override
     public List<Exercise> searchExercises(String keyword, String category) {
@@ -30,6 +34,6 @@ public class ExerciseServiceImpl extends ServiceImpl<ExerciseMapper, Exercise> i
         }
 
         wrapper.orderByAsc(Exercise::getSortOrder);
-        return this.list(wrapper);
+        return exerciseMapper.selectList(wrapper);
     }
 }

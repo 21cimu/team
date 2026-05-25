@@ -8,8 +8,10 @@ import com.fitmind.module.achievement.mapper.UserAchievementMapper;
 import com.fitmind.module.achievement.service.impl.AchievementServiceImpl;
 import com.fitmind.module.community.entity.CommunityPost;
 import com.fitmind.module.community.mapper.CommunityPostMapper;
+import com.fitmind.module.community.mapper.UserFollowMapper;
 import com.fitmind.module.diet.entity.AiDietPlan;
 import com.fitmind.module.diet.mapper.AiDietPlanMapper;
+import com.fitmind.module.notification.service.INotificationService;
 import com.fitmind.module.training.entity.AiTrainingPlan;
 import com.fitmind.module.training.mapper.AiTrainingPlanMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,6 +47,12 @@ class AchievementServiceImplTest {
     @Mock
     private CommunityPostMapper communityPostMapper;
 
+    @Mock
+    private UserFollowMapper userFollowMapper;
+
+    @Mock
+    private INotificationService notificationService;
+
     @InjectMocks
     private AchievementServiceImpl achievementService;
 
@@ -76,6 +84,11 @@ class AchievementServiceImplTest {
         a3.setTarget(1);
         a3.setSortOrder(3);
         sampleAchievements.add(a3);
+
+        lenient().when(aiTrainingPlanMapper.selectList(any(LambdaQueryWrapper.class))).thenReturn(new ArrayList<AiTrainingPlan>());
+        lenient().when(aiDietPlanMapper.selectList(any(LambdaQueryWrapper.class))).thenReturn(new ArrayList<AiDietPlan>());
+        lenient().when(communityPostMapper.selectList(any(LambdaQueryWrapper.class))).thenReturn(new ArrayList<CommunityPost>());
+        lenient().when(userFollowMapper.selectCount(any(LambdaQueryWrapper.class))).thenReturn(0L);
     }
 
     @Test
