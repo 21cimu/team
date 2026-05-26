@@ -7,6 +7,29 @@ export interface ActionPrediction {
   scorePercent: number
 }
 
+export interface JointAngleMetric {
+  key: string
+  label: string
+  current: number
+  average: number
+  min: number
+  max: number
+  unit: string
+}
+
+export interface FormCheck {
+  name: string
+  passed: boolean
+  detail: string
+}
+
+export interface ActionPhaseSegment {
+  phase: string
+  startFrame: number
+  endFrame: number
+  frameCount: number
+}
+
 export interface ExerciseActionAnalysisResult {
   success: boolean
   label: string
@@ -21,7 +44,47 @@ export interface ExerciseActionAnalysisResult {
   totalFrames: number
   sequenceFrames: number
   source: string
+  repetitions: number
+  currentPhase: string
+  phaseTimeline: ActionPhaseSegment[]
+  jointAngles: JointAngleMetric[]
+  formChecks: FormCheck[]
 }
+
+export interface ExerciseRealtimeReadyMessage {
+  type: 'ready'
+  message: string
+  requiredFrames: number
+}
+
+export interface ExerciseRealtimePendingMessage {
+  type: 'pending'
+  message: string
+  capturedFrames: number
+  poseFrames: number
+  requiredFrames: number
+}
+
+export interface ExerciseRealtimeResultMessage {
+  type: 'result'
+  data: ExerciseActionAnalysisResult
+}
+
+export interface ExerciseRealtimeErrorMessage {
+  type: 'error'
+  message: string
+}
+
+export interface ExerciseRealtimePongMessage {
+  type: 'pong'
+}
+
+export type ExerciseRealtimeServerMessage =
+  | ExerciseRealtimeReadyMessage
+  | ExerciseRealtimePendingMessage
+  | ExerciseRealtimeResultMessage
+  | ExerciseRealtimeErrorMessage
+  | ExerciseRealtimePongMessage
 
 export const getExercises = (params?: { keyword?: string; category?: string }) => {
   return request({

@@ -19,4 +19,9 @@ public class ExerciseActionAnalysisResponse {
     private Integer totalFrames;
     private Integer sequenceFrames;
     private String source;
+    private Integer repetitions;
+    private String currentPhase;
+    private List<ActionPhaseSegment> phaseTimeline;
+    private List<JointAngleMetric> jointAngles;
+    private List<FormCheck> formChecks;
 }

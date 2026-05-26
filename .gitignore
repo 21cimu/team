@@ -14,3 +14,4 @@ fitmind-web/tmp/
 fitmind-web/.env.local
 
 fitmind-server/target/
+fitmind-server/src/main/resources/application-local.yml

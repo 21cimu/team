@@ -567,6 +567,7 @@ const navigationSections: NavSection[] = [
       { icon: 'training', label: '训练计划', description: '安排日程与负荷', to: '/app/training' },
       { icon: 'diet', label: '饮食计划', description: '管理热量与营养', to: '/app/diet' },
       { icon: 'food', label: '饮食识别', description: '拍照识别食物', to: '/app/food-recognition' },
+      { icon: 'vision', label: '动作识别', description: '实时识别训练动作', to: '/app/action-analysis' },
       { icon: 'atlas', label: '动作图谱', description: '浏览动作与部位', to: '/app/exercise-atlas' }
     ]
   },
@@ -599,6 +600,7 @@ const uiIcons: Record<string, string> = {
   training: '<path d="M3 10.5v3M6 8v8M9 10.5v3M15 10.5v3M18 8v8M21 10.5v3" /><path d="M6 12h12" />',
   diet: '<path d="M12 4c4.5 2 6.5 5 6.5 8.4A5.5 5.5 0 0 1 13 18h-1a5.5 5.5 0 0 1-5.5-5.6C6.5 9 8.3 6.1 12 4Z" /><path d="M12 8v8M9 11.5h6" />',
   food: '<path d="M5 8.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z" /><path d="M8 8.5 9.5 6h5L16 8.5" /><path d="M12 16a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />',
+  vision: '<path d=\"M3 12s3.5-5 9-5 9 5 9 5-3.5 5-9 5-9-5-9-5Z\" /><path d=\"M12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z\" /><path d=\"M12 4v2M7 6l1.5 1.5M17 6l-1.5 1.5\" />',
   atlas: '<path d="M8.5 5.5a3.5 3.5 0 1 1 7 0c0 1.3-.7 2.4-1.7 3.1l1.4 3.9 2.6 2.4-1.4 1.5-2-1.5-1.1 4.6h-2.6L9.6 14.9l-2 1.5-1.4-1.5 2.6-2.4 1.4-3.9A3.9 3.9 0 0 1 8.5 5.5Z" />',
   history: '<path d="M4 12a8 8 0 1 0 2.3-5.7" /><path d="M4 4v4h4" /><path d="M12 8v4.5l3 1.5" />',
   achievement: '<path d="M8 5h8v3a4 4 0 0 1-8 0V5Z" /><path d="M8 7H6a2 2 0 0 0 0 4h2M16 7h2a2 2 0 0 1 0 4h-2" /><path d="M12 12v3M9.5 20h5M10 15h4l1 3h-6l1-3Z" />',
@@ -1223,6 +1225,13 @@ onUnmounted(() => {
   margin-left: 428px;
   overflow: hidden;
   pointer-events: none;
+}
+
+.topbar-page-portal:has(> #topbar-page-header:empty) {
+  display: none;
+  margin-left: 0;
+  padding: 0;
+  border: 0;
 }
 
 #topbar-page-header {

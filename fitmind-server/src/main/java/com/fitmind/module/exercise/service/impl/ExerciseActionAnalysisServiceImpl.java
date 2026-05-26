@@ -187,10 +187,18 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
         response.setSequenceFrames(raw.getSequenceFrames());
         response.setSource(raw.getSource());
         response.setTopPredictions(raw.getTopK());
+        response.setRepetitions(raw.getRepetitions());
+        response.setCurrentPhase(raw.getCurrentPhase());
+        response.setPhaseTimeline(raw.getPhaseTimeline());
+        response.setJointAngles(raw.getJointAngles());
+        response.setFormChecks(raw.getFormChecks());
         return response;
     }
 
     private String buildHint(ActionVisionResult raw) {
+        if (raw.getHint() != null && !raw.getHint().isBlank()) {
+            return raw.getHint();
+        }
         int scorePercent = raw.getScorePercent() == null ? 0 : raw.getScorePercent();
         if (scorePercent >= 75) {
             return "动作识别稳定，当前节奏和姿态较完整，可以继续关注动作幅度和控制。";
@@ -208,7 +216,11 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
 
     private List<String> buildSuggestions(ActionVisionResult raw) {
         List<String> suggestions = new ArrayList<>();
-        suggestions.addAll(ACTION_TIPS.getOrDefault(raw.getLabel(), List.of()));
+        if (raw.getAdvice() != null && !raw.getAdvice().isEmpty()) {
+            suggestions.addAll(raw.getAdvice());
+        } else {
+            suggestions.addAll(ACTION_TIPS.getOrDefault(raw.getLabel(), List.of()));
+        }
 
         int scorePercent = raw.getScorePercent() == null ? 0 : raw.getScorePercent();
         if (scorePercent < 75) {
