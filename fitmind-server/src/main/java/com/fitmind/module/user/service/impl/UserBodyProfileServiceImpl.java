@@ -2,6 +2,7 @@ package com.fitmind.module.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fitmind.common.cache.UserCacheInvalidationService;
 import com.fitmind.module.user.entity.SysUser;
 import com.fitmind.module.user.entity.UserBodyMetricLog;
 import com.fitmind.module.user.entity.UserBodyProfile;
@@ -22,6 +23,7 @@ public class UserBodyProfileServiceImpl extends ServiceImpl<UserBodyProfileMappe
 
     private final SysUserMapper sysUserMapper;
     private final UserBodyMetricLogMapper userBodyMetricLogMapper;
+    private final UserCacheInvalidationService cacheInvalidationService;
 
     @Override
     public UserBodyProfile getByUsername(String username) {
@@ -68,6 +70,7 @@ public class UserBodyProfileServiceImpl extends ServiceImpl<UserBodyProfileMappe
 
         user.setProfilePromptRequired(false);
         sysUserMapper.updateById(user);
+        cacheInvalidationService.evictProfileData(user.getId());
     }
 
     private void saveMetricSnapshot(UserBodyProfile profile) {

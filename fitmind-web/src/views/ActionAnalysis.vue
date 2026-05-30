@@ -1,78 +1,131 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import {
   analyzeExerciseAction,
+  evaluateRealtimeAction,
   type ExerciseActionAnalysisResult,
-  type ExerciseRealtimeServerMessage
+  type RealtimeActionEvaluationRequest
 } from '../api/exercise'
-import { useUserStore } from '../stores/user'
+import {
+  useLocalPoseCoach,
+  type ActionSelectionMode,
+  type SupportedRealtimeAction
+} from '../composables/useLocalPoseCoach'
 
 type Mode = 'live' | 'upload'
 type UploadStatus = 'idle' | 'analyzing' | 'success' | 'error'
-type LiveStatus = 'idle' | 'starting' | 'streaming' | 'error'
-
-const userStore = useUserStore()
 
 const mode = ref<Mode>('live')
 const uploadStatus = ref<UploadStatus>('idle')
-const liveStatus = ref<LiveStatus>('idle')
-
 const fileInputRef = ref<HTMLInputElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
+const overlayRef = ref<HTMLCanvasElement | null>(null)
 
 const selectedFile = ref<File | null>(null)
 const previewUrl = ref('')
-const result = ref<ExerciseActionAnalysisResult | null>(null)
-const errorMessage = ref('')
-const liveMessage = ref('')
-const liveCapturedFrames = ref(0)
-const livePoseFrames = ref(0)
-const liveRequiredFrames = ref(20)
+const uploadResult = ref<ExerciseActionAnalysisResult | null>(null)
+const uploadError = ref('')
+const serverEnhancedResult = ref<ExerciseActionAnalysisResult | null>(null)
+const serverEnhanceStatus = ref('')
+const serverEnhanceBusy = ref(false)
 
-const recentPhases = computed(() => result.value?.phaseTimeline?.slice(-6) ?? [])
-const jointAngles = computed(() => result.value?.jointAngles ?? [])
-const formChecks = computed(() => result.value?.formChecks ?? [])
-const suggestions = computed(() => result.value?.suggestions ?? [])
+const {
+  status: liveStatus,
+  statusMessage: liveStatusMessage,
+  supportedActions,
+  actionSelectionMode,
+  selectedAction,
+  manualSelectedAction,
+  autoDetectedAction,
+  capturedFrames,
+  poseFrames,
+  requiredFrames,
+  result: liveResult,
+  isActive,
+  start: startLocalCoach,
+  stop: stopLocalCoach,
+  setSelectedAction,
+  setSelectionMode
+} = useLocalPoseCoach()
+
+const activeResult = computed(() => {
+  if (mode.value !== 'live') {
+    return uploadResult.value
+  }
+  if (!liveResult.value) {
+    return null
+  }
+  if (!serverEnhancedResult.value) {
+    return liveResult.value
+  }
+  return {
+    ...liveResult.value,
+    label: serverEnhancedResult.value.label,
+    labelZh: serverEnhancedResult.value.labelZh,
+    score: serverEnhancedResult.value.score,
+    scorePercent: serverEnhancedResult.value.scorePercent,
+    standard: serverEnhancedResult.value.standard,
+    hint: serverEnhancedResult.value.hint,
+    suggestions: serverEnhancedResult.value.suggestions,
+    topPredictions: serverEnhancedResult.value.topPredictions,
+    source: serverEnhancedResult.value.source,
+    formChecks: serverEnhancedResult.value.formChecks
+  } satisfies ExerciseActionAnalysisResult
+})
+const recentPhases = computed(() => activeResult.value?.phaseTimeline?.slice(-6) ?? [])
+const jointAngles = computed(() => activeResult.value?.jointAngles ?? [])
+const formChecks = computed(() => activeResult.value?.formChecks ?? [])
+const suggestions = computed(() => activeResult.value?.suggestions ?? [])
+const selectedActionMeta = computed(() => supportedActions.find(item => item.key === selectedAction.value) ?? null)
+const autoDetectedActionMeta = computed(() => supportedActions.find(item => item.key === autoDetectedAction.value) ?? null)
 
 const scoreTone = computed(() => {
-  const score = result.value?.scorePercent ?? 0
+  const score = activeResult.value?.scorePercent ?? 0
   if (score >= 75) return 'excellent'
   if (score >= 60) return 'steady'
   return 'needs-work'
 })
 
 const scoreLabel = computed(() => {
-  const score = result.value?.scorePercent ?? 0
+  const score = activeResult.value?.scorePercent ?? 0
   if (score >= 75) return '稳定'
   if (score >= 60) return '可提升'
   return '需调整'
 })
 
-const isLiveActive = computed(() => liveStatus.value === 'starting' || liveStatus.value === 'streaming')
-const isBusy = computed(() => uploadStatus.value === 'analyzing' || liveStatus.value === 'starting')
+const liveStatusLabel = computed(() => {
+  if (liveStatus.value === 'starting') return '加载中'
+  if (liveStatus.value === 'tracking') return '本地识别中'
+  if (liveStatus.value === 'error') return '本地识别异常'
+  return '尚未启动'
+})
 
-let liveSocket: WebSocket | null = null
-let liveStream: MediaStream | null = null
-let captureTimer: number | null = null
-let frameInFlight = false
-let manualSocketClose = false
-const captureCanvas = document.createElement('canvas')
+let enhanceTimer: number | null = null
+let lastEnhanceSignature = ''
 
-const revokePreview = () => {
+function revokePreview() {
   if (previewUrl.value) {
     URL.revokeObjectURL(previewUrl.value)
     previewUrl.value = ''
   }
 }
 
-const resetResult = () => {
-  result.value = null
-  errorMessage.value = ''
+function clearEnhancementState() {
+  serverEnhancedResult.value = null
+  serverEnhanceStatus.value = ''
+  serverEnhanceBusy.value = false
+  lastEnhanceSignature = ''
+  if (enhanceTimer !== null) {
+    window.clearTimeout(enhanceTimer)
+    enhanceTimer = null
+  }
 }
 
-const resetUploadState = () => {
+function resetUploadState() {
   uploadStatus.value = 'idle'
+  uploadError.value = ''
+  uploadResult.value = null
   selectedFile.value = null
   revokePreview()
   if (fileInputRef.value) {
@@ -80,69 +133,28 @@ const resetUploadState = () => {
   }
 }
 
-const stopCaptureLoop = () => {
-  if (captureTimer !== null) {
-    window.clearInterval(captureTimer)
-    captureTimer = null
-  }
-  frameInFlight = false
+function stopLiveSession() {
+  clearEnhancementState()
+  stopLocalCoach()
 }
 
-const stopMediaStream = () => {
-  if (liveStream) {
-    liveStream.getTracks().forEach(track => track.stop())
-    liveStream = null
-  }
-  if (videoRef.value) {
-    videoRef.value.srcObject = null
-  }
-}
-
-const closeSocket = () => {
-  if (!liveSocket) return
-  manualSocketClose = true
-  const socket = liveSocket
-  liveSocket = null
-  if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
-    socket.close()
-  }
-}
-
-const stopLiveSession = (resetState = true) => {
-  stopCaptureLoop()
-  closeSocket()
-  stopMediaStream()
-  if (resetState) {
-    liveStatus.value = 'idle'
-    liveMessage.value = ''
-    liveCapturedFrames.value = 0
-    livePoseFrames.value = 0
-    liveRequiredFrames.value = 20
-  }
-}
-
-const handleReset = () => {
-  resetResult()
+function handleReset() {
   resetUploadState()
   stopLiveSession()
 }
 
-const switchMode = (nextMode: Mode) => {
+function switchMode(nextMode: Mode) {
   if (mode.value === nextMode) return
-  if (mode.value === 'live') {
-    stopLiveSession()
-  }
-  mode.value = nextMode
-  resetResult()
-  errorMessage.value = ''
   if (nextMode === 'upload') {
-    liveMessage.value = ''
+    stopLiveSession()
   } else {
     resetUploadState()
+    clearEnhancementState()
   }
+  mode.value = nextMode
 }
 
-const handleFileChange = async (event: Event) => {
+async function handleFileChange(event: Event) {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (!file) return
@@ -156,206 +168,129 @@ const handleFileChange = async (event: Event) => {
 
   stopLiveSession()
   mode.value = 'upload'
-  resetResult()
-  revokePreview()
+  resetUploadState()
 
   selectedFile.value = file
   previewUrl.value = URL.createObjectURL(file)
   uploadStatus.value = 'analyzing'
 
   try {
-    result.value = await analyzeExerciseAction(file)
+    uploadResult.value = await analyzeExerciseAction(file)
     uploadStatus.value = 'success'
   } catch (error: any) {
-    console.error('Action analysis failed:', error)
-    errorMessage.value = error?.message || '动作识别失败，请检查模型环境或重新上传视频。'
     uploadStatus.value = 'error'
+    uploadError.value = error?.message || '动作识别失败，请检查模型环境或重新上传视频。'
   }
 }
 
-const waitForVideoReady = (video: HTMLVideoElement) =>
-  new Promise<void>((resolve, reject) => {
-    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      resolve()
-      return
-    }
-
-    const handleLoaded = () => {
-      cleanup()
-      resolve()
-    }
-    const handleError = () => {
-      cleanup()
-      reject(new Error('摄像头预览启动失败'))
-    }
-    const cleanup = () => {
-      video.removeEventListener('loadedmetadata', handleLoaded)
-      video.removeEventListener('error', handleError)
-    }
-
-    video.addEventListener('loadedmetadata', handleLoaded)
-    video.addEventListener('error', handleError)
-  })
-
-const buildRealtimeSocketUrl = () => {
-  const token = userStore.token || localStorage.getItem('token') || ''
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  const base = window.location.host
-  return `${protocol}//${base}/ws/exercise/realtime?token=${encodeURIComponent(token)}`
-}
-
-const captureAndSendFrame = () => {
-  if (!videoRef.value || !liveSocket || liveSocket.readyState !== WebSocket.OPEN || frameInFlight) {
-    return
-  }
-
-  const video = videoRef.value
-  if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
-    return
-  }
-
-  const width = video.videoWidth
-  const height = video.videoHeight
-  if (!width || !height) {
-    return
-  }
-
-  const maxWidth = 640
-  const scale = Math.min(1, maxWidth / width)
-  captureCanvas.width = Math.round(width * scale)
-  captureCanvas.height = Math.round(height * scale)
-
-  const context = captureCanvas.getContext('2d')
-  if (!context) {
-    return
-  }
-
-  context.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height)
-  frameInFlight = true
-  liveSocket.send(JSON.stringify({
-    type: 'frame',
-    imageBase64: captureCanvas.toDataURL('image/jpeg', 0.72)
-  }))
-}
-
-const startCaptureLoop = () => {
-  if (captureTimer !== null) return
-  captureTimer = window.setInterval(captureAndSendFrame, 280)
-}
-
-const handleRealtimeMessage = (raw: string) => {
-  const message = JSON.parse(raw) as ExerciseRealtimeServerMessage
-  if (message.type === 'ready') {
-    liveStatus.value = 'streaming'
-    liveRequiredFrames.value = message.requiredFrames
-    liveMessage.value = '摄像头已连接，正在收集稳定姿态帧。'
-    startCaptureLoop()
-    return
-  }
-
-  if (message.type === 'pong') {
-    return
-  }
-
-  frameInFlight = false
-
-  if (message.type === 'pending') {
-    liveStatus.value = 'streaming'
-    liveCapturedFrames.value = message.capturedFrames
-    livePoseFrames.value = message.poseFrames
-    liveRequiredFrames.value = message.requiredFrames
-    liveMessage.value = `正在建立动作序列：${message.poseFrames}/${message.requiredFrames} 有效姿态帧`
-    return
-  }
-
-  if (message.type === 'result') {
-    liveStatus.value = 'streaming'
-    result.value = message.data
-    liveCapturedFrames.value = message.data.totalFrames
-    livePoseFrames.value = message.data.poseFrames
-    liveMessage.value = `实时识别中：已分析 ${message.data.totalFrames} 帧`
-    return
-  }
-
-  if (message.type === 'error') {
-    liveStatus.value = 'error'
-    errorMessage.value = message.message
-    liveMessage.value = ''
-  }
-}
-
-const startLiveSession = async () => {
-  if (!userStore.token) {
-    ElMessage.error('请先登录后再使用实时识别')
-    return
-  }
-
-  stopLiveSession()
-  resetUploadState()
-  resetResult()
+async function startLiveSession() {
   mode.value = 'live'
-  liveStatus.value = 'starting'
-  errorMessage.value = ''
-  liveMessage.value = '正在连接摄像头和实时识别服务。'
-  liveCapturedFrames.value = 0
-  livePoseFrames.value = 0
+  resetUploadState()
+  clearEnhancementState()
+
+  if (!videoRef.value || !overlayRef.value) {
+    ElMessage.error('实时识别画布还未就绪')
+    return
+  }
+
+  await startLocalCoach(videoRef.value, overlayRef.value)
+}
+
+function handleActionChange(event: Event) {
+  const target = event.target as HTMLSelectElement
+  clearEnhancementState()
+  setSelectedAction(target.value as SupportedRealtimeAction)
+}
+
+function handleSelectionModeChange(nextMode: ActionSelectionMode) {
+  clearEnhancementState()
+  setSelectionMode(nextMode)
+}
+
+function buildEnhancementSignature(resultData: ExerciseActionAnalysisResult, actionKey: SupportedRealtimeAction) {
+  const poseBucket = Math.floor((resultData.poseFrames ?? 0) / 8)
+  return `${actionKey}:${resultData.repetitions}:${resultData.currentPhase}:${poseBucket}`
+}
+
+async function requestServerEnhancement(
+  resultData: ExerciseActionAnalysisResult,
+  actionKey: SupportedRealtimeAction,
+  signature: string
+) {
+  const payload: RealtimeActionEvaluationRequest = {
+    actionKey,
+    ...resultData
+  }
+
+  serverEnhanceBusy.value = true
+  serverEnhanceStatus.value = '服务端正在复核最近一段骨架摘要。'
 
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        width: { ideal: 960 },
-        height: { ideal: 540 },
-        facingMode: 'user'
-      },
-      audio: false
-    })
-    liveStream = stream
-
-    const video = videoRef.value
-    if (!video) {
-      throw new Error('摄像头预览组件未就绪')
+    const enhanced = await evaluateRealtimeAction(payload)
+    if (lastEnhanceSignature !== signature || mode.value !== 'live') {
+      return
     }
-
-    video.srcObject = stream
-    video.muted = true
-    video.playsInline = true
-    await waitForVideoReady(video)
-    await video.play()
-
-    manualSocketClose = false
-    liveSocket = new WebSocket(buildRealtimeSocketUrl())
-    liveSocket.onmessage = event => handleRealtimeMessage(event.data)
-    liveSocket.onerror = () => {
-      liveStatus.value = 'error'
-      errorMessage.value = '实时连接失败，请检查后端 WebSocket 和 Python 实时模型进程。'
-      liveMessage.value = ''
-      stopCaptureLoop()
-    }
-    liveSocket.onclose = () => {
-      stopCaptureLoop()
-      if (!manualSocketClose) {
-        liveStatus.value = 'error'
-        errorMessage.value = errorMessage.value || '实时识别连接已断开'
-        stopMediaStream()
-      }
-      manualSocketClose = false
-    }
+    serverEnhancedResult.value = enhanced
+    serverEnhanceStatus.value = '服务端增强评分已同步，当前显示的是统一口径复核结果。'
   } catch (error: any) {
-    console.error('Failed to start realtime session:', error)
-    liveStatus.value = 'error'
-    errorMessage.value = error?.message || '无法启动摄像头识别'
-    liveMessage.value = ''
-    stopLiveSession(false)
-    stopMediaStream()
+    if (lastEnhanceSignature !== signature || mode.value !== 'live') {
+      return
+    }
+    serverEnhanceStatus.value = error?.message
+      ? `服务端复核暂时失败，当前继续使用本地结果：${error.message}`
+      : '服务端复核暂时失败，当前继续使用本地结果。'
+  } finally {
+    if (lastEnhanceSignature === signature) {
+      serverEnhanceBusy.value = false
+    }
   }
 }
+
+watch([mode, liveResult, selectedAction], ([currentMode, currentLiveResult, currentAction]) => {
+  if (currentMode !== 'live') {
+    clearEnhancementState()
+    return
+  }
+
+  if (!currentLiveResult) {
+    serverEnhancedResult.value = null
+    serverEnhanceStatus.value = ''
+    serverEnhanceBusy.value = false
+    lastEnhanceSignature = ''
+    if (enhanceTimer !== null) {
+      window.clearTimeout(enhanceTimer)
+      enhanceTimer = null
+    }
+    return
+  }
+
+  if ((currentLiveResult.poseFrames ?? 0) < (currentLiveResult.sequenceFrames ?? 0)) {
+    return
+  }
+
+  const signature = buildEnhancementSignature(currentLiveResult, currentAction)
+  if (signature === lastEnhanceSignature) {
+    return
+  }
+  lastEnhanceSignature = signature
+
+  if (enhanceTimer !== null) {
+    window.clearTimeout(enhanceTimer)
+  }
+  enhanceTimer = window.setTimeout(() => {
+    enhanceTimer = null
+    requestServerEnhancement(currentLiveResult, currentAction, signature)
+  }, 260)
+})
 
 onBeforeUnmount(() => {
   revokePreview()
   stopLiveSession()
 })
 
-const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
+function formCheckClass(passed: boolean) {
+  return passed ? 'pass' : 'warn'
+}
 </script>
 
 <template>
@@ -364,20 +299,24 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
       <div class="topbar-page-shell">
         <div class="topbar-page-copy">
           <span class="topbar-page-kicker">动作识别</span>
-          <strong class="topbar-page-title">Fitness Vision</strong>
-          <span class="topbar-page-meta">实时摄像头或上传训练视频，持续返回动作类别、阶段、计数和纠正建议。</span>
+          <strong class="topbar-page-title">Realtime Motion Coach</strong>
+          <span class="topbar-page-meta">
+            实时模式已切换为浏览器端本地姿态识别，上传模式继续保留后端 Python 离线分析。
+          </span>
         </div>
       </div>
     </Teleport>
 
     <div class="page-header">
       <div>
-        <div class="text-label mb-xs">[ Fitness Vision ]</div>
-        <h1 class="text-display-md text-primary">实时动作视觉评分</h1>
-        <p class="text-secondary mt-xs">左侧保留完整输入画面，右侧聚合识别结果、阶段判断与训练建议。</p>
+        <div class="text-label mb-xs">[ H5-FIRST MOTION ANALYSIS ]</div>
+        <h1 class="text-display-md text-primary">实时动作识别</h1>
+        <p class="text-secondary mt-xs">
+          实时模式在浏览器本地完成姿态检测和基础反馈，弱网下仍可持续给出计数、阶段和纠错提示。
+        </p>
       </div>
       <button
-        v-if="result || isLiveActive || uploadStatus !== 'idle'"
+        v-if="activeResult || isActive || uploadStatus !== 'idle'"
         class="nd-btn page-reset-btn"
         @click="handleReset"
       >
@@ -391,8 +330,10 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
           <div class="stage-topbar">
             <div class="stage-heading">
               <div class="card-kicker">Input Source</div>
-              <h2 class="stage-title">{{ mode === 'live' ? '实时输入视窗' : '上传视频视窗' }}</h2>
-              <p class="stage-subtitle">输入源作为主视图固定在左侧，适合边看画面边观察右侧数据反馈。</p>
+              <h2 class="stage-title">{{ mode === 'live' ? '本地实时识别' : '离线上传分析' }}</h2>
+              <p class="stage-subtitle">
+                实时模式优先服务移动端和浏览器端场景，不再把摄像头帧持续发送到后端。
+              </p>
             </div>
 
             <div class="mode-switch">
@@ -403,56 +344,94 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 
           <div class="stage-body">
             <div v-if="mode === 'live'" class="stage-mode-panel live-panel">
+              <div class="live-toolbar">
+                <div class="toolbar-selection">
+                  <div class="selection-mode-switch">
+                    <button
+                      :class="['selection-chip', { active: actionSelectionMode === 'auto' }]"
+                      @click="handleSelectionModeChange('auto')"
+                    >
+                      自动识别
+                    </button>
+                    <button
+                      :class="['selection-chip', { active: actionSelectionMode === 'manual' }]"
+                      @click="handleSelectionModeChange('manual')"
+                    >
+                      手动覆盖
+                    </button>
+                  </div>
+
+                  <label class="action-picker" :class="{ disabled: actionSelectionMode === 'auto' }">
+                    <span>{{ actionSelectionMode === 'auto' ? '手动覆盖动作' : '当前动作' }}</span>
+                    <select
+                      :value="manualSelectedAction"
+                      :disabled="actionSelectionMode === 'auto'"
+                      @change="handleActionChange"
+                    >
+                      <option v-for="item in supportedActions" :key="item.key" :value="item.key">
+                        {{ item.labelZh }}
+                      </option>
+                    </select>
+                  </label>
+                </div>
+                <div class="toolbar-note">
+                  <strong>
+                    {{ actionSelectionMode === 'auto'
+                      ? `自动锁定：${selectedActionMeta?.labelZh || '等待判断'}`
+                      : `手动锁定：${selectedActionMeta?.labelZh || '未选择动作'}` }}
+                  </strong>
+                  <span v-if="actionSelectionMode === 'auto' && autoDetectedActionMeta">
+                    当前最高候选：{{ autoDetectedActionMeta.labelZh }}
+                  </span>
+                  <span v-else>
+                    复杂统一评分仍保留给上传分析链路。
+                  </span>
+                </div>
+              </div>
+
               <div class="video-shell stage-viewport-shell">
-                <video ref="videoRef" class="camera-video" autoplay muted playsinline />
-                <div v-if="!isLiveActive" class="video-overlay">
-                  <strong>打开摄像头后开始实时识别</strong>
-                  <span>建议全身入镜、机位固定，优先使用正侧前方视角。</span>
+                <video ref="videoRef" class="camera-video mirror" autoplay muted playsinline />
+                <canvas ref="overlayRef" class="pose-overlay"></canvas>
+                <div v-if="!isActive" class="video-overlay">
+                  <strong>打开摄像头后开始本地实时识别</strong>
+                  <span>建议全身入镜、机位固定，优先选择正侧前方视角。</span>
                 </div>
                 <div class="stage-live-badge">
                   <span class="stage-live-dot"></span>
-                  <span>{{ liveStatus === 'streaming' ? 'LIVE ANALYSIS' : 'CAMERA READY' }}</span>
+                  <span>{{ isActive ? 'LOCAL POSE' : 'CAMERA READY' }}</span>
                 </div>
               </div>
 
               <div class="stage-controlbar">
                 <div class="control-row">
-                  <button class="primary-btn" :disabled="isBusy" @click="startLiveSession">
-                    {{ isLiveActive ? '重新连接' : '启动实时识别' }}
+                  <button class="primary-btn" :disabled="liveStatus === 'starting'" @click="startLiveSession">
+                    {{ isActive ? '重新启动本地识别' : '启动本地识别' }}
                   </button>
-                  <button class="ghost-btn" :disabled="!isLiveActive" @click="stopLiveSession">停止摄像头</button>
+                  <button class="ghost-btn" :disabled="!isActive" @click="stopLiveSession">停止摄像头</button>
                 </div>
 
                 <div class="stage-meta-grid">
                   <div class="status-card status-card-wide" :class="liveStatus">
-                    <strong>
-                      {{
-                        liveStatus === 'starting'
-                          ? '连接中'
-                          : liveStatus === 'streaming'
-                            ? '实时识别中'
-                            : liveStatus === 'error'
-                              ? '连接异常'
-                              : '尚未启动'
-                      }}
-                    </strong>
-                    <p v-if="liveStatus === 'streaming' || liveStatus === 'starting'">{{ liveMessage }}</p>
-                    <p v-else-if="liveStatus === 'error'">{{ errorMessage }}</p>
-                    <p v-else>点击启动后，页面会打开摄像头并通过 WebSocket 持续返回识别结果。</p>
+                    <strong>{{ liveStatusLabel }}</strong>
+                    <p v-if="liveStatus !== 'error'">{{ liveStatusMessage || '等待启动本地识别。' }}</p>
+                    <p v-else>{{ liveStatusMessage || '本地识别启动失败。' }}</p>
+                    <p v-if="serverEnhanceStatus" class="server-enhance-note" :class="{ busy: serverEnhanceBusy }">
+                      {{ serverEnhanceStatus }}
+                    </p>
                   </div>
 
                   <div class="metric-row stage-metrics">
                     <div class="metric-pill">
-                      <span>采集帧</span>
-                      <strong>{{ liveCapturedFrames }}</strong>
+                      <span>采样帧</span>
+                      <strong>{{ capturedFrames }}</strong>
                     </div>
                     <div class="metric-pill">
                       <span>有效姿态帧</span>
-                      <strong>{{ livePoseFrames }}</strong>
+                      <strong>{{ poseFrames }}</strong>
                     </div>
                     <div class="metric-pill">
-                      <span>最低要求</span>
-                      <strong>{{ liveRequiredFrames }}</strong>
+                      <span>最少要求</span>
+                      <strong>{{ requiredFrames }}</strong>
                     </div>
                   </div>
                 </div>
@@ -474,9 +453,9 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
                 </template>
                 <template v-else>
                   <div class="drop-copy">
-                    <span class="drop-index">01</span>
-                    <strong>上传健身动作视频</strong>
-                    <span>建议 3 到 6 秒、机位固定、人物全身入镜，便于后端提取稳定骨架序列。</span>
+                    <span class="drop-index">Offline Python Analysis</span>
+                    <strong>上传训练视频</strong>
+                    <span>上传模式仍走后端完整视频分析，适合作为更统一的离线复核和训练记录来源。</span>
                   </div>
                 </template>
               </button>
@@ -500,8 +479,8 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
                     }}
                   </strong>
                   <p v-if="uploadStatus === 'analyzing'">后端正在调用本地 Python 模型分析完整视频序列。</p>
-                  <p v-else-if="uploadStatus === 'error'">{{ errorMessage }}</p>
-                  <p v-else>上传模式会在视频分析结束后返回一次完整结果。</p>
+                  <p v-else-if="uploadStatus === 'error'">{{ uploadError }}</p>
+                  <p v-else>离线上传模式会返回更完整的结构化分析结果，适合作为训练记录与复核。</p>
                 </div>
               </div>
             </div>
@@ -514,57 +493,59 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
           <div class="score-header">
             <div>
               <div class="card-kicker">识别结果</div>
-              <h2>{{ result?.labelZh || '等待识别' }}</h2>
-              <p>{{ result?.label || 'Start realtime analysis or upload a workout clip.' }}</p>
+              <h2>{{ activeResult?.labelZh || '等待识别' }}</h2>
+              <p>{{ activeResult?.label || 'Start local realtime analysis or upload a workout clip.' }}</p>
             </div>
             <div class="score-badge">
-              <span class="score-number">{{ result?.scorePercent ?? '--' }}</span>
+              <span class="score-number">{{ activeResult?.scorePercent ?? '--' }}</span>
               <small>分</small>
             </div>
           </div>
 
           <div class="score-strip">
             <span>{{ scoreLabel }}</span>
-            <strong>{{ result?.standard ? '动作识别稳定' : '动作仍需进一步校准' }}</strong>
+            <strong>{{ activeResult?.standard ? '动作识别稳定' : '动作仍需进一步校准' }}</strong>
           </div>
 
-          <p class="score-hint">{{ result?.hint || '识别结果会显示在这里。' }}</p>
+          <p class="score-hint">
+            {{ activeResult?.hint || '识别结果会在这里显示。本地实时模式优先反馈基础动作质量，上传模式返回更完整结果。' }}
+          </p>
         </div>
 
         <div class="panel-card">
           <div class="detail-header">
             <div class="card-kicker">Phase & Reps</div>
-            <span v-if="result" class="text-caption">sequence {{ result.sequenceFrames }} frames</span>
+            <span v-if="activeResult" class="text-caption">sequence {{ activeResult.sequenceFrames }} frames</span>
           </div>
 
-          <div v-if="result" class="phase-overview">
+          <div v-if="activeResult" class="phase-overview">
             <div class="metric-tile">
               <span>重复计数</span>
-              <strong>{{ result.repetitions }}</strong>
+              <strong>{{ activeResult.repetitions }}</strong>
             </div>
             <div class="metric-tile">
               <span>当前阶段</span>
-              <strong>{{ result.currentPhase }}</strong>
+              <strong>{{ activeResult.currentPhase }}</strong>
             </div>
           </div>
 
-          <div v-if="result && recentPhases.length" class="timeline-row">
+          <div v-if="activeResult && recentPhases.length" class="timeline-row">
             <div v-for="segment in recentPhases" :key="`${segment.phase}-${segment.startFrame}`" class="timeline-chip">
               <strong>{{ segment.phase }}</strong>
               <span>{{ segment.startFrame }}-{{ segment.endFrame }}</span>
             </div>
           </div>
-          <div v-else class="empty-detail">阶段分段和重复计数会在动作序列稳定后显示。</div>
+          <div v-else class="empty-detail">动作阶段和重复计数会在姿态序列稳定后显示。</div>
         </div>
 
         <div class="panel-card">
           <div class="detail-header">
             <div class="card-kicker">Top Predictions</div>
-            <span v-if="result" class="text-caption">{{ result.poseFrames }} / {{ result.totalFrames }} frames with pose</span>
+            <span v-if="activeResult" class="text-caption">{{ activeResult.poseFrames }} / {{ activeResult.totalFrames }} frames with pose</span>
           </div>
 
-          <div v-if="result" class="prediction-list">
-            <div v-for="item in result.topPredictions" :key="item.label" class="prediction-row">
+          <div v-if="activeResult" class="prediction-list">
+            <div v-for="item in activeResult.topPredictions" :key="item.label" class="prediction-row">
               <div class="prediction-copy">
                 <strong>{{ item.labelZh }}</strong>
                 <span>{{ item.label }}</span>
@@ -577,13 +558,13 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
               </div>
             </div>
           </div>
-          <div v-else class="empty-detail">识别完成后会展示模型当前最可能的动作类别。</div>
+          <div v-else class="empty-detail">识别完成后会展示当前最可能的动作类别。</div>
         </div>
 
         <div class="panel-card">
           <div class="detail-header">
-            <div class="card-kicker">Joint Angles</div>
-            <span v-if="result" class="text-caption">{{ jointAngles.length }} metrics</span>
+            <div class="card-kicker">Joint Metrics</div>
+            <span v-if="activeResult" class="text-caption">{{ jointAngles.length }} metrics</span>
           </div>
 
           <div v-if="jointAngles.length" class="angle-table">
@@ -599,13 +580,13 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
               </div>
             </div>
           </div>
-          <div v-else class="empty-detail">暂未提取到稳定关节角度数据。</div>
+          <div v-else class="empty-detail">姿态稳定后会显示关节角度和动作幅度指标。</div>
         </div>
 
         <div class="panel-card">
           <div class="detail-header">
             <div class="card-kicker">Form Checks</div>
-            <span v-if="result" class="text-caption">{{ result.source }}</span>
+            <span v-if="activeResult" class="text-caption">{{ activeResult.source }}</span>
           </div>
 
           <div v-if="formChecks.length" class="check-list">
@@ -629,7 +610,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
           <div v-if="suggestions.length" class="suggestion-list">
             <div v-for="item in suggestions" :key="item" class="suggestion-item">{{ item }}</div>
           </div>
-          <div v-else class="empty-detail">建议会根据动作阶段、关节角和规则检查生成。</div>
+          <div v-else class="empty-detail">建议会根据当前动作、节奏和基础姿态质量生成。</div>
         </div>
       </aside>
     </div>
@@ -670,7 +651,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 
 .result-column {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .panel-card {
@@ -706,7 +687,6 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   gap: 18px;
   padding: 24px 28px 18px;
   border-bottom: 1px solid rgba(31, 29, 27, 0.12);
-  background: transparent;
 }
 
 .stage-heading {
@@ -751,13 +731,20 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   justify-content: flex-end;
 }
 
-.mode-chip {
+.mode-chip,
+.action-picker select,
+.primary-btn,
+.ghost-btn,
+.nd-btn {
   min-height: 48px;
   border: 1px solid rgba(31, 29, 27, 0.14);
+  border-radius: 0;
+}
+
+.mode-chip {
   background: transparent;
   color: var(--text-secondary);
   padding: 0 18px;
-  border-radius: 0;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -769,24 +756,100 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   background: #17181f;
   border-color: #17181f;
   color: var(--text-inverse);
-  box-shadow: none;
 }
 
 .stage-body {
   flex: 1;
   min-height: 0;
   padding: 24px 28px 28px;
-  background: transparent;
 }
 
-.stage-mode-panel,
-.live-panel,
-.upload-panel {
+.stage-mode-panel {
   display: flex;
   flex-direction: column;
   gap: 18px;
   height: 100%;
   min-height: 0;
+}
+
+.live-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+}
+
+.toolbar-selection {
+  display: grid;
+  gap: 10px;
+}
+
+.selection-mode-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selection-chip {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(31, 29, 27, 0.14);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.selection-chip.active {
+  background: #17181f;
+  border-color: #17181f;
+  color: var(--text-inverse);
+}
+
+.action-picker {
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.action-picker.disabled {
+  opacity: 0.64;
+}
+
+.action-picker span {
+  color: var(--text-secondary);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.action-picker select {
+  width: 100%;
+  padding: 0 14px;
+  background: rgba(255, 251, 246, 0.9);
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.toolbar-note {
+  max-width: 42ch;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: right;
+  display: grid;
+  gap: 4px;
+}
+
+.toolbar-note strong {
+  color: var(--text-main);
+  font-size: 13px;
+}
+
+.toolbar-note span {
+  font-size: 12px;
 }
 
 .video-shell,
@@ -816,12 +879,28 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 }
 
 .camera-video,
-.preview-video {
+.preview-video,
+.pose-overlay {
   width: 100%;
   height: 100%;
   min-height: 460px;
-  object-fit: cover;
   display: block;
+}
+
+.camera-video,
+.preview-video {
+  object-fit: cover;
+}
+
+.mirror {
+  transform: scaleX(-1);
+}
+
+.pose-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: scaleX(-1);
 }
 
 .video-overlay,
@@ -848,7 +927,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 
 .video-overlay span,
 .drop-copy span {
-  max-width: 40ch;
+  max-width: 42ch;
   color: var(--text-inverse-muted);
   line-height: 1.8;
 }
@@ -910,10 +989,6 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   gap: 12px;
 }
 
-.stage-metrics {
-  align-self: stretch;
-}
-
 .phase-overview {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -923,9 +998,6 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .primary-btn,
 .ghost-btn,
 .nd-btn {
-  min-height: 52px;
-  border: 1px solid rgba(31, 29, 27, 0.16);
-  border-radius: 0;
   padding: 0 18px;
   font-weight: 700;
   cursor: pointer;
@@ -959,17 +1031,13 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   border: 1px solid rgba(31, 29, 27, 0.14);
 }
 
-.status-card-wide {
-  height: 100%;
-}
-
 .status-card.starting,
 .status-card.analyzing {
   border-left: 4px solid var(--accent);
   background: rgba(111, 125, 135, 0.08);
 }
 
-.status-card.streaming,
+.status-card.tracking,
 .status-card.success {
   border-left: 4px solid var(--success);
   background: rgba(113, 136, 113, 0.08);
@@ -993,6 +1061,15 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   line-height: 1.75;
 }
 
+.server-enhance-note {
+  padding-top: 10px;
+  border-top: 1px dashed rgba(31, 29, 27, 0.16);
+}
+
+.server-enhance-note.busy {
+  color: var(--primary);
+}
+
 .metric-pill,
 .metric-tile {
   display: flex;
@@ -1010,7 +1087,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .metric-tile span,
 .text-caption {
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1018,7 +1095,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .metric-pill strong,
 .metric-tile strong {
   font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 2.2vw, 2.4rem);
+  font-size: clamp(1.2rem, 1.7vw, 1.8rem);
   color: var(--text-main);
 }
 
@@ -1037,7 +1114,6 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 
 .analysis-sidebar::-webkit-scrollbar-thumb {
   background: rgba(31, 29, 27, 0.18);
-  border-radius: 0;
 }
 
 .file-meta,
@@ -1047,7 +1123,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .check-item,
 .suggestion-item {
   border-radius: 0;
-  padding: 14px 16px;
+  padding: 10px 12px;
   background: rgba(255, 251, 246, 0.64);
   border: 1px solid rgba(31, 29, 27, 0.12);
 }
@@ -1078,24 +1154,27 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 
 .score-header {
   align-items: flex-start;
-  gap: 18px;
-  padding: 24px 28px 0;
+  gap: 12px;
+  padding: 18px 20px 0;
 }
 
 .score-header h2 {
   margin: 6px 0 2px;
-  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
   color: var(--text-main);
+  line-height: 1.05;
 }
 
 .score-header p {
   margin: 0;
   color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .score-badge {
-  min-width: 110px;
-  padding: 16px 18px;
+  min-width: 84px;
+  padding: 10px 12px;
   border-radius: 0;
   border: 1px solid rgba(31, 29, 27, 0.12);
   background: rgba(255, 251, 246, 0.68);
@@ -1103,7 +1182,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 }
 
 .score-number {
-  font-size: 42px;
+  font-size: 30px;
   line-height: 1;
   color: var(--text-main);
   font-weight: 800;
@@ -1112,11 +1191,12 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 
 .score-badge small {
   color: var(--text-secondary);
+  font-size: 11px;
 }
 
 .score-strip {
-  margin: 18px 28px 0;
-  padding: 16px 18px;
+  margin: 12px 20px 0;
+  padding: 10px 12px;
   border-radius: 0;
   border-top: 1px solid rgba(31, 29, 27, 0.12);
   border-bottom: 1px solid rgba(31, 29, 27, 0.12);
@@ -1124,14 +1204,15 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 }
 
 .score-hint {
-  margin: 18px 28px 24px;
+  margin: 12px 20px 18px;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
+  font-size: 13px;
 }
 
 .detail-header {
   margin-bottom: 0;
-  padding: 22px 24px 16px;
+  padding: 16px 18px 12px;
   border-bottom: 1px solid rgba(31, 29, 27, 0.08);
 }
 
@@ -1142,14 +1223,14 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .suggestion-list {
   display: grid;
   gap: 0;
-  padding: 0 24px 24px;
+  padding: 0 18px 18px;
 }
 
 .prediction-row,
 .angle-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 168px);
+  gap: 12px;
   align-items: center;
 }
 
@@ -1165,7 +1246,8 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .angle-values span,
 .file-meta span {
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.4;
 }
 
 .prediction-meter,
@@ -1175,7 +1257,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 }
 
 .prediction-bar {
-  height: 9px;
+  height: 7px;
   background: rgba(31, 29, 27, 0.1);
   overflow: hidden;
 }
@@ -1197,7 +1279,8 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .empty-detail {
   margin: 0;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
+  font-size: 13px;
 }
 
 .phase-overview,
@@ -1206,14 +1289,14 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .angle-table,
 .check-list,
 .suggestion-list {
-  padding-top: 18px;
+  padding-top: 12px;
 }
 
 .phase-overview,
 .empty-detail {
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-bottom: 24px;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-bottom: 18px;
 }
 
 .suggestion-item {
@@ -1238,10 +1321,7 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
 .prediction-meter strong {
   color: var(--text-main);
   font-family: var(--font-heading);
-}
-
-.empty-detail {
-  color: var(--text-secondary);
+  font-size: 13px;
 }
 
 .hidden-input {
@@ -1268,11 +1348,21 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
     grid-template-columns: 1fr;
   }
 
+  .live-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbar-note {
+    text-align: left;
+  }
+
   .video-shell,
   .upload-dropzone,
   .stage-viewport-shell,
   .camera-video,
-  .preview-video {
+  .preview-video,
+  .pose-overlay {
     min-height: 380px;
   }
 }
@@ -1321,7 +1411,8 @@ const formCheckClass = (passed: boolean) => (passed ? 'pass' : 'warn')
   .upload-dropzone,
   .stage-viewport-shell,
   .camera-video,
-  .preview-video {
+  .preview-video,
+  .pose-overlay {
     min-height: 280px;
   }
 

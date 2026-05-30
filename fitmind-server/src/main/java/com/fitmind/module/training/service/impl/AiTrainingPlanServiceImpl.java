@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fitmind.common.cache.CacheNames;
+import com.fitmind.common.cache.UserCacheInvalidationService;
 import com.fitmind.module.ai.dto.WeatherContextSnapshot;
 import com.fitmind.module.ai.service.DeepSeekAiService;
 import com.fitmind.module.notification.service.INotificationService;
@@ -17,6 +19,7 @@ import com.fitmind.module.user.entity.UserBodyProfile;
 import com.fitmind.module.user.mapper.UserBodyProfileMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,8 +37,10 @@ public class AiTrainingPlanServiceImpl extends ServiceImpl<AiTrainingPlanMapper,
     private final ObjectMapper objectMapper;
     private final INotificationService notificationService;
     private final ExerciseStrategyFactory strategyFactory;
+    private final UserCacheInvalidationService cacheInvalidationService;
 
     @Override
+    @Cacheable(cacheNames = CacheNames.TRAINING_TODAY, key = "#userId", unless = "#result == null")
     public AiTrainingPlan getPlanForToday(Long userId) {
         return this.getOne(new LambdaQueryWrapper<AiTrainingPlan>()
                 .eq(AiTrainingPlan::getUserId, userId)
@@ -96,6 +101,7 @@ public class AiTrainingPlanServiceImpl extends ServiceImpl<AiTrainingPlanMapper,
         } else {
             this.updateById(plan);
         }
+        cacheInvalidationService.evictTrainingPlanData(userId);
         return plan;
     }
 
@@ -116,6 +122,7 @@ public class AiTrainingPlanServiceImpl extends ServiceImpl<AiTrainingPlanMapper,
                 "训练协议已完成 " + plan.getPlanName(), plan.getId(), "training");
 
         triggerDynamicAdjustment(userId);
+        cacheInvalidationService.evictTrainingPlanData(userId);
     }
 
     @Override

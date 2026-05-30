@@ -2,13 +2,13 @@ package com.fitmind.module.user.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fitmind.common.api.Result;
+import com.fitmind.common.security.CurrentUserProvider;
 import com.fitmind.module.user.entity.SysUser;
 import com.fitmind.module.user.service.ISysUserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -23,6 +23,7 @@ public class SysUserController {
     private static final long PROFILE_PROMPT_INACTIVE_DAYS = 3;
 
     private final ISysUserService sysUserService;
+    private final CurrentUserProvider currentUserProvider;
 
     @PostMapping("/login")
     public Result<Map<String, Object>> login(@RequestBody LoginRequest request) {
@@ -61,9 +62,8 @@ public class SysUserController {
     
     @GetMapping("/me")
     public Result<Map<String, Object>> me() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         SysUser user = sysUserService.getOne(
-                new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
+                new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, currentUserProvider.getCurrentUsername()));
         if (user == null) {
             return Result.error(401, "用户不存在");
         }
@@ -100,9 +100,8 @@ public class SysUserController {
     @PutMapping("/update-profile")
     public Result<String> updateProfile(@RequestBody UpdateProfileRequest request) {
         try {
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
             SysUser user = sysUserService.getOne(
-                    new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
+                    new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, currentUserProvider.getCurrentUsername()));
             if (user == null) {
                 return Result.error(401, "用户不存在");
             }
@@ -120,8 +119,10 @@ public class SysUserController {
     @PutMapping("/change-password")
     public Result<String> changePassword(@RequestBody ChangePasswordRequest request) {
         try {
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            sysUserService.changePassword(username, request.getOldPassword(), request.getNewPassword());
+            sysUserService.changePassword(
+                    currentUserProvider.getCurrentUsername(),
+                    request.getOldPassword(),
+                    request.getNewPassword());
             return Result.success("密码修改成功");
         } catch (Exception e) {
             return Result.error(e.getMessage());

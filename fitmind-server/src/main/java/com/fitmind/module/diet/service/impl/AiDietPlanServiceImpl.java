@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fitmind.common.cache.CacheNames;
+import com.fitmind.common.cache.UserCacheInvalidationService;
 import com.fitmind.module.ai.dto.WeatherContextSnapshot;
 import com.fitmind.module.ai.service.DeepSeekAiService;
 import com.fitmind.module.diet.entity.AiDietPlan;
@@ -20,6 +22,7 @@ import com.fitmind.module.user.mapper.UserBodyMetricLogMapper;
 import com.fitmind.module.user.mapper.UserBodyProfileMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -42,8 +45,10 @@ public class AiDietPlanServiceImpl extends ServiceImpl<AiDietPlanMapper, AiDietP
     private final INotificationService notificationService;
     private final IAiTrainingPlanService aiTrainingPlanService;
     private final UserBodyMetricLogMapper userBodyMetricLogMapper;
+    private final UserCacheInvalidationService cacheInvalidationService;
 
     @Override
+    @Cacheable(cacheNames = CacheNames.DIET_TODAY, key = "#userId", unless = "#result == null")
     public AiDietPlan getPlanForToday(Long userId) {
         return this.getOne(new LambdaQueryWrapper<AiDietPlan>()
                 .eq(AiDietPlan::getUserId, userId)
@@ -119,6 +124,7 @@ public class AiDietPlanServiceImpl extends ServiceImpl<AiDietPlanMapper, AiDietP
                 .eq(AiDietPlan::getPlanDate, LocalDate.now()));
 
         this.save(plan);
+        cacheInvalidationService.evictDietPlanData(userId);
         return plan;
     }
 
@@ -137,6 +143,7 @@ public class AiDietPlanServiceImpl extends ServiceImpl<AiDietPlanMapper, AiDietP
 
         notificationService.sendNotification(userId, "DIET", "饮食打卡完成",
                 "今日饮食计划已完成打卡，摄入热量: " + plan.getTotalCalories() + " kcal", plan.getId(), "diet");
+        cacheInvalidationService.evictDietPlanData(userId);
     }
 
     private String buildRecentDietContext(Long userId) {

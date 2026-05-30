@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fitmind.module.exercise.dto.ActionPrediction;
 import com.fitmind.module.exercise.dto.ActionVisionResult;
 import com.fitmind.module.exercise.dto.ExerciseActionAnalysisResponse;
+import com.fitmind.module.exercise.dto.FormCheck;
+import com.fitmind.module.exercise.dto.JointAngleMetric;
+import com.fitmind.module.exercise.dto.RealtimeActionEvaluationRequest;
 import com.fitmind.module.exercise.service.IExerciseActionAnalysisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,15 +35,44 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysisService {
 
+    private static final Map<String, String> ACTION_KEY_TO_LABEL = Map.ofEntries(
+            Map.entry("bodyweight_squat", "BodyWeightSquats"),
+            Map.entry("jumping_jack", "JumpingJack"),
+            Map.entry("forward_lunge", "Lunges"),
+            Map.entry("push_up", "PushUps"),
+            Map.entry("high_knees", "HighKnees"),
+            Map.entry("standing_knee_raise", "StandingKneeRaise"),
+            Map.entry("glute_bridge", "GluteBridge"),
+            Map.entry("plank", "Plank"),
+            Map.entry("burpee", "Burpee")
+    );
+
+    private static final Map<String, String> ACTION_LABEL_ZH = Map.ofEntries(
+            Map.entry("BodyWeightSquats", "徒手深蹲"),
+            Map.entry("JumpingJack", "开合跳"),
+            Map.entry("Lunges", "弓步"),
+            Map.entry("PushUps", "俯卧撑"),
+            Map.entry("HighKnees", "高抬腿"),
+            Map.entry("StandingKneeRaise", "站姿提膝"),
+            Map.entry("GluteBridge", "臀桥"),
+            Map.entry("Plank", "平板支撑"),
+            Map.entry("Burpee", "波比跳")
+    );
+
     private static final Map<String, List<String>> ACTION_TIPS = Map.ofEntries(
-            Map.entry("BenchPress", List.of("肩胛先收紧再推起，避免耸肩。", "手腕尽量垂直叠在肘部上方。")),
-            Map.entry("BodyWeightSquats", List.of("先向后坐髋，再同步屈膝下蹲。", "下蹲过程中保持胸椎稳定，不要塌腰。")),
-            Map.entry("JumpingJack", List.of("手脚张开和回收节奏尽量一致。", "落地时膝盖朝向脚尖，避免内扣。")),
-            Map.entry("JumpRope", List.of("手肘贴近躯干，用手腕发力而不是大幅甩肩。", "前脚掌轻落地，保持弹性节奏。")),
-            Map.entry("Lunges", List.of("前后脚距离拉开，躯干保持竖直。", "下落时垂直下沉，不要明显前冲。")),
-            Map.entry("PullUps", List.of("先稳定悬垂，再向下收肘发力。", "减少摆腿和借力，保持躯干控制。")),
-            Map.entry("PushUps", List.of("核心收紧，避免塌腰或撅臀。", "下放到清晰屈肘后再稳定推起。")),
-            Map.entry("WallPushups", List.of("从肩到脚跟尽量保持一条直线。", "接近墙面时控制速度，不要反弹借力。"))
+            Map.entry("BenchPress", List.of("Stabilize the shoulders before pressing.", "Keep the forearms stacked over the elbows.")),
+            Map.entry("BodyWeightSquats", List.of("Sit the hips back before bending the knees.", "Keep the chest stable through the full squat.")),
+            Map.entry("JumpingJack", List.of("Open and close with a steady rhythm.", "Land softly and keep the knees aligned.")),
+            Map.entry("JumpRope", List.of("Keep the elbows close to the torso.", "Use light landings and a steady bounce rhythm.")),
+            Map.entry("Lunges", List.of("Set the stride first, then descend vertically.", "Keep the torso stable instead of lunging forward.")),
+            Map.entry("PullUps", List.of("Stabilize the hanging position before pulling.", "Reduce swing and keep the core tight.")),
+            Map.entry("PushUps", List.of("Brace the core so the trunk stays straight.", "Lower with control before pushing up.")),
+            Map.entry("HighKnees", List.of("Raise each knee clearly instead of doing half reps.", "Keep the upper body stable while alternating.")),
+            Map.entry("StandingKneeRaise", List.of("Lift the knee from a stable trunk.", "Lower the leg under control instead of dropping it.")),
+            Map.entry("GluteBridge", List.of("Drive the hips up and squeeze the glutes at the top.", "Pause briefly at the bridge peak before lowering.")),
+            Map.entry("Plank", List.of("Keep a straight line from shoulders to hips.", "Brace the trunk to avoid sagging or piking.")),
+            Map.entry("Burpee", List.of("Make the squat-down and kick-back transition continuous.", "Stabilize the support position before standing up again.")),
+            Map.entry("WallPushups", List.of("Keep a straight line from shoulders to heels.", "Control the lowering speed without bouncing off the wall."))
     );
 
     private final ObjectMapper objectMapper;
@@ -75,7 +108,7 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
             ActionVisionResult rawResult = executeInference(savedFile);
             return toResponse(rawResult);
         } catch (IOException e) {
-            throw new IllegalStateException("无法保存上传视频", e);
+            throw new IllegalStateException("Unable to store uploaded fitness video", e);
         } finally {
             if (savedFile != null) {
                 try {
@@ -87,14 +120,91 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
         }
     }
 
+    @Override
+    public ExerciseActionAnalysisResponse evaluateRealtimeSummary(RealtimeActionEvaluationRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("Realtime evaluation payload is required");
+        }
+        String expectedLabel = ACTION_KEY_TO_LABEL.get(request.getActionKey());
+        if (expectedLabel == null) {
+            throw new IllegalArgumentException("Unsupported realtime action: " + request.getActionKey());
+        }
+
+        int totalFrames = safeInt(request.getTotalFrames());
+        int poseFrames = safeInt(request.getPoseFrames());
+        if (totalFrames <= 0 || poseFrames <= 0) {
+            throw new IllegalArgumentException("Realtime evaluation requires stable pose frames");
+        }
+
+        List<FormCheck> incomingChecks = copyChecks(request.getFormChecks());
+        List<JointAngleMetric> incomingMetrics = copyMetrics(request.getJointAngles());
+        List<ActionPrediction> predictions = normalizePredictions(request.getTopPredictions(), expectedLabel);
+
+        double poseRatio = totalFrames > 0 ? clamp01((double) poseFrames / totalFrames) : 0.0;
+        double localScore = request.getScore() != null ? request.getScore() : percentToScore(request.getScorePercent());
+        double predictionScore = predictions.stream()
+                .filter(item -> expectedLabel.equals(item.getLabel()))
+                .map(ActionPrediction::getScore)
+                .filter(value -> value != null)
+                .findFirst()
+                .orElse(localScore);
+        double checkPassRatio = incomingChecks.isEmpty()
+                ? (Boolean.TRUE.equals(request.getStandard()) ? 0.7 : 0.45)
+                : incomingChecks.stream().filter(item -> Boolean.TRUE.equals(item.getPassed())).count() * 1.0 / incomingChecks.size();
+        double motionCoverage = estimateMotionCoverage(incomingMetrics);
+        double repetitionFactor = request.getRepetitions() != null && request.getRepetitions() > 0 ? 1.0 : 0.72;
+
+        double enhancedScore = 0.38 * Math.max(localScore, predictionScore)
+                + 0.22 * poseRatio
+                + 0.20 * checkPassRatio
+                + 0.12 * motionCoverage
+                + 0.08 * repetitionFactor;
+        if (request.getLabel() != null && !request.getLabel().equals(expectedLabel)) {
+            enhancedScore -= 0.08;
+        }
+        enhancedScore = clamp01(enhancedScore);
+        int scorePercent = (int) Math.round(enhancedScore * 100);
+
+        List<FormCheck> mergedChecks = appendServerChecks(incomingChecks, poseRatio, motionCoverage);
+        List<String> suggestions = buildRealtimeSuggestions(
+                expectedLabel,
+                mergedChecks,
+                scorePercent,
+                poseRatio,
+                motionCoverage,
+                request.getSuggestions()
+        );
+
+        ExerciseActionAnalysisResponse response = new ExerciseActionAnalysisResponse();
+        response.setSuccess(true);
+        response.setLabel(expectedLabel);
+        response.setLabelZh(ACTION_LABEL_ZH.getOrDefault(expectedLabel, request.getLabelZh()));
+        response.setScore(roundScore(enhancedScore));
+        response.setScorePercent(scorePercent);
+        response.setStandard(scorePercent >= 70 && poseRatio >= 0.45 && checkPassRatio >= 0.45);
+        response.setHint(buildRealtimeHint(scorePercent, poseRatio, motionCoverage, mergedChecks));
+        response.setSuggestions(suggestions);
+        response.setTopPredictions(predictions);
+        response.setPoseFrames(poseFrames);
+        response.setTotalFrames(totalFrames);
+        response.setSequenceFrames(safeInt(request.getSequenceFrames()));
+        response.setSource("browser-local + server-enhanced");
+        response.setRepetitions(safeInt(request.getRepetitions()));
+        response.setCurrentPhase(request.getCurrentPhase());
+        response.setPhaseTimeline(request.getPhaseTimeline());
+        response.setJointAngles(incomingMetrics);
+        response.setFormChecks(mergedChecks);
+        return response;
+    }
+
     private void validateFile(MultipartFile file) {
         if (file == null || file.isEmpty()) {
-            throw new IllegalArgumentException("请上传动作视频文件");
+            throw new IllegalArgumentException("Please upload a workout video file");
         }
         String filename = file.getOriginalFilename();
         String lower = filename == null ? "" : filename.toLowerCase(Locale.ROOT);
         if (!(lower.endsWith(".mp4") || lower.endsWith(".mov") || lower.endsWith(".avi") || lower.endsWith(".webm") || lower.endsWith(".mkv"))) {
-            throw new IllegalArgumentException("仅支持 MP4、MOV、AVI、WEBM 或 MKV 视频");
+            throw new IllegalArgumentException("Only MP4, MOV, AVI, WEBM, and MKV videos are supported");
         }
     }
 
@@ -138,7 +248,7 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
             boolean finished = process.waitFor(timeoutSeconds, TimeUnit.SECONDS);
             if (!finished) {
                 process.destroyForcibly();
-                throw new IllegalStateException("动作识别超时，请缩短视频时长后重试");
+                throw new IllegalStateException("Action analysis timed out. Try a shorter clip.");
             }
 
             String stdout = stdoutFuture.get(5, TimeUnit.SECONDS);
@@ -147,18 +257,18 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
                 throw new IllegalStateException(extractError(stderr, stdout));
             }
             if (stdout == null || stdout.isBlank()) {
-                throw new IllegalStateException("视觉模型没有返回识别结果");
+                throw new IllegalStateException("Vision model returned no result");
             }
 
             ActionVisionResult result = objectMapper.readValue(stdout, ActionVisionResult.class);
             if (!Boolean.TRUE.equals(result.getSuccess())) {
-                throw new IllegalStateException("视觉模型未返回有效识别结果");
+                throw new IllegalStateException("Vision model did not return a valid result");
             }
             return result;
         } catch (IllegalStateException e) {
             throw e;
         } catch (Exception e) {
-            throw new IllegalStateException("调用视觉模型失败: " + e.getMessage(), e);
+            throw new IllegalStateException("Failed to execute vision model: " + e.getMessage(), e);
         }
     }
 
@@ -201,17 +311,17 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
         }
         int scorePercent = raw.getScorePercent() == null ? 0 : raw.getScorePercent();
         if (scorePercent >= 75) {
-            return "动作识别稳定，当前节奏和姿态较完整，可以继续关注动作幅度和控制。";
+            return "Recognition is stable. Keep focusing on motion range and control.";
         }
         if (scorePercent >= 60) {
-            return "动作已识别，但稳定性一般。建议放慢节奏，确保关键关节轨迹更清晰。";
+            return "Recognition is working, but the motion still needs better consistency.";
         }
         Integer poseFrames = raw.getPoseFrames();
         Integer totalFrames = raw.getTotalFrames();
         if (poseFrames != null && totalFrames != null && totalFrames > 0 && poseFrames * 1.0 / totalFrames < 0.35) {
-            return "有效骨架帧过少，优先调整拍摄距离、光线和机位，再重新上传。";
+            return "Too few valid pose frames were captured. Adjust camera angle, lighting, and framing.";
         }
-        return "当前识别置信度偏低，可能是动作幅度不足，或视频角度没有覆盖关键关节。";
+        return "Current confidence is low. Try a clearer angle and a more complete movement range.";
     }
 
     private List<String> buildSuggestions(ActionVisionResult raw) {
@@ -224,19 +334,203 @@ public class ExerciseActionAnalysisServiceImpl implements IExerciseActionAnalysi
 
         int scorePercent = raw.getScorePercent() == null ? 0 : raw.getScorePercent();
         if (scorePercent < 75) {
-            suggestions.add("确保人物全身完整入镜，避免裁掉头部、手腕或脚踝。");
+            suggestions.add("Keep the full body visible in frame and avoid cutting off the head, wrists, or feet.");
         }
         if (scorePercent < 60) {
-            suggestions.add("使用更稳定的机位连续录制 3 到 6 秒，避免强逆光和明显模糊。");
+            suggestions.add("Record a stable 3-6 second clip with consistent lighting and less motion blur.");
         }
-        suggestions.add("如需更可靠评分，优先使用侧前方或正侧方固定视角录制。");
+        suggestions.add("For more reliable scoring, prefer a fixed front-side or side camera angle.");
         return suggestions.stream().distinct().limit(4).toList();
+    }
+
+    private List<FormCheck> copyChecks(List<FormCheck> source) {
+        if (source == null || source.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<FormCheck> copied = new ArrayList<>();
+        for (FormCheck item : source) {
+            if (item == null) {
+                continue;
+            }
+            FormCheck copy = new FormCheck();
+            copy.setName(item.getName());
+            copy.setPassed(item.getPassed());
+            copy.setDetail(item.getDetail());
+            copied.add(copy);
+        }
+        return copied;
+    }
+
+    private List<JointAngleMetric> copyMetrics(List<JointAngleMetric> source) {
+        if (source == null || source.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<JointAngleMetric> copied = new ArrayList<>();
+        for (JointAngleMetric item : source) {
+            if (item == null) {
+                continue;
+            }
+            JointAngleMetric copy = new JointAngleMetric();
+            copy.setKey(item.getKey());
+            copy.setLabel(item.getLabel());
+            copy.setCurrent(item.getCurrent());
+            copy.setAverage(item.getAverage());
+            copy.setMin(item.getMin());
+            copy.setMax(item.getMax());
+            copy.setUnit(item.getUnit());
+            copied.add(copy);
+        }
+        return copied;
+    }
+
+    private List<ActionPrediction> normalizePredictions(List<ActionPrediction> input, String expectedLabel) {
+        List<ActionPrediction> items = new ArrayList<>();
+        if (input != null) {
+            for (ActionPrediction item : input) {
+                if (item == null || item.getLabel() == null || item.getLabel().isBlank()) {
+                    continue;
+                }
+                ActionPrediction copy = new ActionPrediction();
+                copy.setLabel(item.getLabel());
+                copy.setLabelZh(item.getLabelZh());
+                copy.setScore(item.getScore() != null ? roundScore(clamp01(item.getScore())) : percentToScore(item.getScorePercent()));
+                copy.setScorePercent(item.getScorePercent() != null
+                        ? Math.max(0, Math.min(100, item.getScorePercent()))
+                        : (int) Math.round(copy.getScore() * 100));
+                items.add(copy);
+            }
+        }
+        boolean hasExpected = items.stream().anyMatch(item -> expectedLabel.equals(item.getLabel()));
+        if (!hasExpected) {
+            ActionPrediction fallback = new ActionPrediction();
+            fallback.setLabel(expectedLabel);
+            fallback.setLabelZh(ACTION_LABEL_ZH.getOrDefault(expectedLabel, expectedLabel));
+            fallback.setScore(0.55);
+            fallback.setScorePercent(55);
+            items.add(fallback);
+        }
+        items.sort(Comparator.comparing(ActionPrediction::getScore, Comparator.nullsLast(Comparator.reverseOrder())));
+        return items.stream().limit(3).toList();
+    }
+
+    private double estimateMotionCoverage(List<JointAngleMetric> metrics) {
+        if (metrics == null || metrics.isEmpty()) {
+            return 0.45;
+        }
+        double accumulated = 0.0;
+        int counted = 0;
+        for (JointAngleMetric metric : metrics) {
+            if (metric == null || metric.getMax() == null || metric.getMin() == null) {
+                continue;
+            }
+            double range = Math.max(0.0, metric.getMax() - metric.getMin());
+            double normalized = "x".equalsIgnoreCase(metric.getUnit())
+                    ? clamp01(range / 0.9)
+                    : clamp01(range / 70.0);
+            accumulated += normalized;
+            counted += 1;
+        }
+        if (counted == 0) {
+            return 0.45;
+        }
+        return accumulated / counted;
+    }
+
+    private List<FormCheck> appendServerChecks(List<FormCheck> checks, double poseRatio, double motionCoverage) {
+        List<FormCheck> merged = new ArrayList<>(checks);
+
+        FormCheck poseCoverage = new FormCheck();
+        poseCoverage.setName("Pose coverage");
+        poseCoverage.setPassed(poseRatio >= 0.45);
+        poseCoverage.setDetail(poseRatio >= 0.45
+                ? "Stable body coverage detected across the recent frame window."
+                : "Too few stable pose frames were captured in the recent window.");
+        merged.add(poseCoverage);
+
+        FormCheck motionWindow = new FormCheck();
+        motionWindow.setName("Motion window");
+        motionWindow.setPassed(motionCoverage >= 0.45);
+        motionWindow.setDetail(motionCoverage >= 0.45
+                ? "Recent frame window shows enough movement range for server-side review."
+                : "Recent movement range is still limited; a longer or clearer rep window will help.");
+        merged.add(motionWindow);
+        return merged;
+    }
+
+    private List<String> buildRealtimeSuggestions(
+            String expectedLabel,
+            List<FormCheck> checks,
+            int scorePercent,
+            double poseRatio,
+            double motionCoverage,
+            List<String> clientSuggestions
+    ) {
+        List<String> suggestions = new ArrayList<>();
+        if (clientSuggestions != null) {
+            suggestions.addAll(clientSuggestions);
+        }
+        for (FormCheck check : checks) {
+            if (check != null && Boolean.FALSE.equals(check.getPassed()) && check.getDetail() != null && !check.getDetail().isBlank()) {
+                suggestions.add(check.getDetail());
+            }
+        }
+        suggestions.addAll(ACTION_TIPS.getOrDefault(expectedLabel, List.of()));
+        if (poseRatio < 0.45) {
+            suggestions.add("Keep the full body in frame and avoid cutting off the head, wrists, or feet.");
+        }
+        if (motionCoverage < 0.45) {
+            suggestions.add("Use a slightly longer movement window so the server can verify the full rep path.");
+        }
+        if (scorePercent < 65) {
+            suggestions.add("Slow the tempo down and make each repetition more deliberate before speeding up.");
+        }
+        return suggestions.stream()
+                .filter(item -> item != null && !item.isBlank())
+                .distinct()
+                .limit(5)
+                .toList();
+    }
+
+    private String buildRealtimeHint(int scorePercent, double poseRatio, double motionCoverage, List<FormCheck> checks) {
+        long failedChecks = checks.stream().filter(item -> item != null && Boolean.FALSE.equals(item.getPassed())).count();
+        if (poseRatio < 0.45) {
+            return "Server review is limited because the recent pose window is not stable enough. Keep the whole body in frame.";
+        }
+        if (motionCoverage < 0.45) {
+            return "Server review is active, but the recent movement range is still shallow. Complete a fuller rep window.";
+        }
+        if (scorePercent >= 78 && failedChecks <= 1) {
+            return "Server-enhanced review agrees the current motion pattern is stable and complete.";
+        }
+        if (scorePercent >= 65) {
+            return "Server-enhanced review confirms the rep pattern, but there is still room to improve consistency.";
+        }
+        return "Server-enhanced review sees the target motion, but the current rep quality is still unstable.";
+    }
+
+    private int safeInt(Integer value) {
+        return value == null ? 0 : value;
+    }
+
+    private double percentToScore(Integer percent) {
+        if (percent == null) {
+            return 0.0;
+        }
+        return clamp01(percent / 100.0);
+    }
+
+    private double clamp01(double value) {
+        return Math.max(0.0, Math.min(1.0, value));
+    }
+
+    private double roundScore(double value) {
+        return Math.round(value * 1000.0) / 1000.0;
     }
 
     private String extractError(String stderr, String stdout) {
         String candidate = stderr != null && !stderr.isBlank() ? stderr : stdout;
         if (candidate == null || candidate.isBlank()) {
-            return "视觉模型执行失败";
+            return "Vision model execution failed";
         }
         String[] lines = candidate.strip().split("\\R");
         return lines[lines.length - 1].trim();

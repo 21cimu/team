@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fitmind.common.cache.CacheNames;
+import com.fitmind.common.cache.UserCacheInvalidationService;
 import com.fitmind.module.community.entity.CommunityComment;
 import com.fitmind.module.community.entity.CommunityPost;
 import com.fitmind.module.community.entity.CommunityPostLike;
@@ -15,6 +17,7 @@ import com.fitmind.module.user.entity.SysUser;
 import com.fitmind.module.user.mapper.SysUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +34,7 @@ public class CommunityPostServiceImpl extends ServiceImpl<CommunityPostMapper, C
     private final SysUserMapper sysUserMapper;
     private final CommunityCommentMapper communityCommentMapper;
     private final CommunityPostLikeMapper communityPostLikeMapper;
+    private final UserCacheInvalidationService cacheInvalidationService;
 
     @Override
     public void createPost(Long userId, String content) {
@@ -40,9 +44,12 @@ public class CommunityPostServiceImpl extends ServiceImpl<CommunityPostMapper, C
         post.setLikes(0);
         post.setCreateTime(LocalDateTime.now());
         this.save(post);
+        cacheInvalidationService.evictCommunityFeed();
     }
 
     @Override
+    @Cacheable(cacheNames = CacheNames.COMMUNITY_FEED,
+            key = "(#currentUserId == null ? 'anonymous' : #currentUserId) + ':' + #current + ':' + #size")
     public Page<CommunityPost> getFeed(Long currentUserId, int current, int size) {
         Page<CommunityPost> page = new Page<>(current, size);
         LambdaQueryWrapper<CommunityPost> queryWrapper = new LambdaQueryWrapper<>();
@@ -101,6 +108,7 @@ public class CommunityPostServiceImpl extends ServiceImpl<CommunityPostMapper, C
 
         CommunityPost post = this.getById(postId);
         post.setLiked(liked);
+        cacheInvalidationService.evictCommunityFeed();
         return post;
     }
 
@@ -119,6 +127,7 @@ public class CommunityPostServiceImpl extends ServiceImpl<CommunityPostMapper, C
         communityPostLikeMapper.delete(new LambdaQueryWrapper<CommunityPostLike>()
                 .eq(CommunityPostLike::getPostId, postId));
         this.removeById(postId);
+        cacheInvalidationService.evictCommunityFeed();
     }
 
     private Set<Long> findLikedPostIds(Long currentUserId, List<CommunityPost> posts) {

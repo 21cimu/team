@@ -3,6 +3,7 @@ package com.fitmind.module.exercise.controller;
 import com.fitmind.common.api.Result;
 import com.fitmind.module.exercise.data.AceExerciseCatalog;
 import com.fitmind.module.exercise.dto.ExerciseActionAnalysisResponse;
+import com.fitmind.module.exercise.dto.RealtimeActionEvaluationRequest;
 import com.fitmind.module.exercise.entity.Exercise;
 import com.fitmind.module.exercise.service.IExerciseActionAnalysisService;
 import com.fitmind.module.exercise.service.IExerciseService;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,6 +77,17 @@ public class ExerciseController {
             return Result.error(400, e.getMessage());
         } catch (Exception e) {
             return Result.error("动作识别失败: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/realtime/evaluate")
+    public Result<ExerciseActionAnalysisResponse> evaluateRealtimeAction(@RequestBody RealtimeActionEvaluationRequest request) {
+        try {
+            return Result.success(exerciseActionAnalysisService.evaluateRealtimeSummary(request));
+        } catch (IllegalArgumentException e) {
+            return Result.error(400, e.getMessage());
+        } catch (Exception e) {
+            return Result.error("Realtime action evaluation failed: " + e.getMessage());
         }
     }
 

@@ -51,6 +51,10 @@ export interface ExerciseActionAnalysisResult {
   formChecks: FormCheck[]
 }
 
+export interface RealtimeActionEvaluationRequest extends ExerciseActionAnalysisResult {
+  actionKey: string
+}
+
 export interface ExerciseRealtimeReadyMessage {
   type: 'ready'
   message: string
@@ -113,5 +117,13 @@ export const analyzeExerciseAction = (file: File) => {
       'Content-Type': 'multipart/form-data'
     },
     data: formData
+  })
+}
+
+export const evaluateRealtimeAction = (data: RealtimeActionEvaluationRequest) => {
+  return request({
+    url: '/exercise/realtime/evaluate',
+    method: 'post',
+    data
   })
 }

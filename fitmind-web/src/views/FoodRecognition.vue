@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onActivated, onMounted, onUnmounted } from 'vue';
 import { recognizeFood, getCommonFoods, searchFood, addFoodRecord, type FoodItem, type FoodRecognitionResult } from '../api/food';
+import { getTodayTrainingPlan } from '../api/ai';
 import { ElMessage } from 'element-plus';
 import { readImageAsOptimizedDataUrl } from '../utils/imageUpload';
+import { localizeExercise } from '../utils/exerciseLocalization';
 
 const status = ref<'idle' | 'analyzing' | 'success' | 'error'>('idle');
 const image = ref<string | null>(null);
@@ -16,12 +18,23 @@ const loadingProgress = ref(0);
 const addingFoodId = ref<string | null>(null);
 const searchingFoods = ref(false);
 
-const basePlan = ref([
+type TrainingPlanItem = {
+  id: number | string;
+  name: string;
+  sets: string;
+  type: string;
+  icon: string;
+  isNew?: boolean;
+  isModified?: boolean;
+};
+
+const DEFAULT_TRAINING_PLAN: TrainingPlanItem[] = [
   { id: 1, name: '杠铃深蹲', sets: '4组 x 10次', type: '下肢力量', icon: '⌖' },
   { id: 2, name: '罗马尼亚硬拉', sets: '4组 x 12次', type: '下肢力量', icon: '⌖' },
   { id: 3, name: '坐姿腿屈伸', sets: '3组 x 15次', type: '孤立刺激', icon: '⌖' }
-]);
-const currentPlan = ref([...basePlan.value]);
+];
+const syncedPlan = ref<TrainingPlanItem[]>([...DEFAULT_TRAINING_PLAN]);
+const currentPlan = ref<TrainingPlanItem[]>([...DEFAULT_TRAINING_PLAN]);
 
 const FOOD_NAME_MAP: Record<string, string> = {
   apple: '苹果',
@@ -206,6 +219,9 @@ const visibleFoods = computed(() => {
   return commonFoods.value.filter((food) => matchesFoodKeyword(food, keyword));
 });
 
+const visibleTrainingPlan = computed(() => currentPlan.value.slice(0, 8));
+const hiddenTrainingCount = computed(() => Math.max(0, currentPlan.value.length - visibleTrainingPlan.value.length));
+
 const loadCommonFoods = async () => {
   const result: any = await getCommonFoods();
   const foods = Array.isArray(result?.foods) ? result.foods : [];
@@ -240,19 +256,156 @@ const getCalorieClass = (calories: number) => {
   return 'high';
 };
 
+const resolveExerciseCategory = (exercise: any) => {
+  const type = typeof exercise?.type === 'string' ? exercise.type.toLowerCase() : '';
+  if (type === 'cardio' || exercise?.duration || exercise?.distance || exercise?.pace) return 'cardio';
+  if (type === 'flexibility' || (exercise?.holdTime || exercise?.rounds) && !exercise?.sets) return 'flexibility';
+  return 'strength';
+};
+
+const getExercisePlanTypeLabel = (exercise: any) => {
+  const category = resolveExerciseCategory(exercise);
+  if (category === 'cardio') return '有氧耐力';
+  if (category === 'flexibility') return '柔韧恢复';
+  return '力量训练';
+};
+
+const formatExercisePrescription = (exercise: any) => {
+  const category = resolveExerciseCategory(exercise);
+  if (category === 'cardio') {
+    const duration = exercise?.duration || exercise?.estimatedDuration || 20;
+    const distance = exercise?.distance ? ` · ${exercise.distance}公里` : '';
+    return `${duration}分钟${distance}`;
+  }
+  if (category === 'flexibility') {
+    const rounds = exercise?.rounds || 3;
+    const holdTime = exercise?.holdTime || 30;
+    return `${rounds}轮 x ${holdTime}秒`;
+  }
+  const sets = exercise?.sets || 3;
+  const reps = exercise?.reps || 10;
+  return `${sets}组 x ${reps}次`;
+};
+
+const mapExerciseToPlanItem = (exercise: any, index: number): TrainingPlanItem => {
+  const localized = localizeExercise(exercise || {});
+  return {
+    id: exercise?.id || index + 1,
+    name: localized.displayName || exercise?.name || `动作 ${index + 1}`,
+    sets: formatExercisePrescription(exercise),
+    type: getExercisePlanTypeLabel(exercise),
+    icon: '⌖'
+  };
+};
+
+const parseTrainingPlanItems = (plan: any): TrainingPlanItem[] => {
+  if (!plan?.content) return [];
+
+  try {
+    const parsed = JSON.parse(plan.content);
+    if (!Array.isArray(parsed?.exercises)) return [];
+    return parsed.exercises.map((exercise: any, index: number) => mapExerciseToPlanItem(exercise, index));
+  } catch (error) {
+    console.error('Failed to parse today training plan:', error);
+    return [];
+  }
+};
+
+const buildAdjustedTrainingPlan = (planItems: TrainingPlanItem[], data: any) => {
+  let newPlan = [...planItems];
+  let feedback = '分析完成：';
+
+  if (data.totalCalories > 800 || data.totalCarbs > 80) {
+    feedback += `检测到本餐热量（${data.totalCalories} 千卡）与碳水偏高。为防止脂肪囤积，我已在今晚训练计划尾部动态增加「高强度间歇有氧(HIIT)」，请务必完成。`;
+    newPlan.push({
+      id: `extra-${Date.now()}`,
+      name: '动感单车 HIIT',
+      sets: '15分钟 (冲刺20s/慢骑40s)',
+      type: '燃脂急救 (动态新增)',
+      icon: '⌖',
+      isNew: true
+    });
+  } else if (data.totalProtein > 35 && data.totalCalories > 400) {
+    feedback += `本餐蛋白质充足（${data.totalProtein}g），能量储备极佳！是突破极限的好时机，我已将首个训练动作的容量上调，去冲击更高质量的完成度。`;
+    if (newPlan.length > 0) {
+      newPlan[0] = { ...newPlan[0], sets: '5组 x 8次 (强度上调)', isModified: true };
+    }
+  } else if (data.totalCalories < 300) {
+    feedback += `本餐摄入偏低（仅 ${data.totalCalories} 千卡），存在训练中低血糖风险。我已将今日计划整体降阶，减少容量，请注意安全，训练后务必补充快碳！`;
+    newPlan = newPlan.map((item) => ({
+      ...item,
+      sets: item.sets.replace('4组', '3组').replace('3组', '2组'),
+      isModified: true
+    }));
+  } else {
+    feedback += '本餐宏量营养素比例均衡，完美契合您的身体档案。训练计划无需调整，按部就班执行，保持状态！';
+  }
+
+  return { feedback, plan: newPlan };
+};
+
+const syncTrainingPlanPreview = (recognized: FoodRecognitionResult | null = recognitionResult.value) => {
+  if (!recognized) {
+    currentPlan.value = [...syncedPlan.value];
+    return;
+  }
+
+  const adjusted = buildAdjustedTrainingPlan(syncedPlan.value, recognized);
+  currentPlan.value = adjusted.plan;
+  aiFeedback.value = adjusted.feedback;
+};
+
+const refreshTrainingPlan = async () => {
+  try {
+    const plan = await getTodayTrainingPlan();
+    const parsedItems = parseTrainingPlanItems(plan);
+    syncedPlan.value = parsedItems.length > 0 ? parsedItems : [...DEFAULT_TRAINING_PLAN];
+  } catch (error) {
+    console.error('Failed to load today training plan:', error);
+    syncedPlan.value = [...DEFAULT_TRAINING_PLAN];
+  }
+
+  syncTrainingPlanPreview();
+};
+
+const handleWindowFocus = () => {
+  void refreshTrainingPlan();
+};
+
+const handleVisibilityChange = () => {
+  if (document.visibilityState === 'visible') {
+    void refreshTrainingPlan();
+  }
+};
+
 onMounted(async () => {
   try {
-    await loadCommonFoods();
+    await Promise.all([
+      loadCommonFoods(),
+      refreshTrainingPlan()
+    ]);
   } catch (error) {
-    console.error('Failed to load common foods:', error);
+    console.error('Failed to initialize food recognition page:', error);
   }
+
+  window.addEventListener('focus', handleWindowFocus);
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+});
+
+onActivated(() => {
+  void refreshTrainingPlan();
+});
+
+onUnmounted(() => {
+  window.removeEventListener('focus', handleWindowFocus);
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
 });
 
 const handleImageUpload = async (imageBase64: string) => {
   status.value = 'analyzing';
   errorMessage.value = '';
   recognitionResult.value = null;
-  currentPlan.value = [...basePlan.value];
+  currentPlan.value = [...syncedPlan.value];
   aiFeedback.value = 'AI 视觉引擎正在解析食物成分与热量...';
   loadingProgress.value = 0;
 
@@ -269,7 +422,7 @@ const handleImageUpload = async (imageBase64: string) => {
     recognitionResult.value = result;
     image.value = imageBase64;
     status.value = 'success';
-    adjustTrainingPlan(result);
+    syncTrainingPlanPreview(result);
   } catch (error) {
     clearInterval(progressInterval);
     console.error('Food recognition failed:', error);
@@ -279,39 +432,11 @@ const handleImageUpload = async (imageBase64: string) => {
   }
 };
 
-const adjustTrainingPlan = (data: any) => {
-  let newPlan = [...basePlan.value];
-  let feedback = `分析完成：`;
-
-  if (data.totalCalories > 800 || data.totalCarbs > 80) {
-    feedback += `检测到本餐热量（${data.totalCalories} 千卡）与碳水偏高。为防止脂肪囤积，我已在今晚训练计划尾部动态增加「高强度间歇有氧(HIIT)」，请务必完成。`;
-    newPlan.push({
-      id: 4,
-      name: '动感单车 HIIT',
-      sets: '15分钟 (冲刺20s/慢骑40s)',
-      type: '燃脂急救 (动态新增)',
-      icon: '⌖',
-      isNew: true
-    });
-  } else if (data.totalProtein > 35 && data.totalCalories > 400) {
-    feedback += `本餐蛋白质充足（${data.totalProtein}g），能量储备极佳！是突破极限的好时机，我已将「杠铃深蹲」的容量上调至 5 组，去冲击大重量吧！`;
-    newPlan[0] = { ...newPlan[0], sets: '5组 x 8次 (重量突破)', isModified: true };
-  } else if (data.totalCalories < 300) {
-    feedback += `本餐摄入偏低（仅 ${data.totalCalories} 千卡），存在训练中低血糖风险。我已将今日计划整体降阶，减少容量，请注意安全，训练后务必补充快碳！`;
-    newPlan = newPlan.map(p => ({ ...p, sets: p.sets.replace('4组', '3组').replace('3组', '2组'), isModified: true }));
-  } else {
-    feedback += `本餐宏量营养素比例均衡，完美契合您的身体档案。训练计划无需调整，按部就班执行，保持状态！`;
-  }
-
-  aiFeedback.value = feedback;
-  currentPlan.value = newPlan;
-};
-
 const handleReset = () => {
   status.value = 'idle';
   image.value = null;
   recognitionResult.value = null;
-  currentPlan.value = [...basePlan.value];
+  currentPlan.value = [...syncedPlan.value];
   aiFeedback.value = '等待今日饮食打卡数据同步，AI 教练将为您生成针对性指导...';
 };
 
@@ -514,7 +639,7 @@ const handleSearch = async () => {
           </div>
         </div>
 
-        <div class="nd-card training-card mt-xl">
+        <div class="nd-card training-card">
           <div class="card-top flex-between mb-lg">
             <div class="text-label">[ 今日训练 ]</div>
             <span class="sync-tag">实时同步</span>
@@ -522,7 +647,7 @@ const handleSearch = async () => {
 
           <div class="training-list">
             <div
-              v-for="(item, index) in currentPlan"
+              v-for="(item, index) in visibleTrainingPlan"
               :key="item.id"
               class="training-row"
               :class="{ 'is-new': item.isNew, 'is-modified': item.isModified }"
@@ -534,9 +659,10 @@ const handleSearch = async () => {
                   <span v-if="item.isNew" class="badge badge-new">AI 新增</span>
                   <span v-else-if="item.isModified" class="badge badge-mod">AI 调整</span>
                 </div>
-                <span class="text-caption">{{ item.type }}</span>
               </div>
-              <div class="training-sets">{{ item.sets }}</div>
+            </div>
+            <div v-if="hiddenTrainingCount > 0" class="training-more">
+              另有 {{ hiddenTrainingCount }} 个动作已折叠
             </div>
           </div>
 
@@ -1017,7 +1143,6 @@ const handleSearch = async () => {
 }
 
 .training-card {
-  flex: 1;
   padding: 24px 24px 22px;
 }
 
@@ -1035,14 +1160,14 @@ const handleSearch = async () => {
 .training-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 10px;
 }
 
 .training-row {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-md);
+  gap: 12px;
+  padding: 12px 14px;
   border: 2px solid var(--border-visible);
   background: rgba(248, 250, 252, 0.02);
   transition: all 0.2s ease;
@@ -1063,14 +1188,14 @@ const handleSearch = async () => {
 }
 
 .training-idx {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--border-visible);
+  border: 1px solid var(--border-visible);
   font-family: var(--font-heading);
-  font-size: var(--body-sm);
+  font-size: 12px;
   font-weight: 900;
   color: var(--text-secondary);
   flex-shrink: 0;
@@ -1090,7 +1215,7 @@ const handleSearch = async () => {
 
 .training-name {
   font-family: var(--font-heading);
-  font-size: var(--body);
+  font-size: var(--body-sm);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text-main);
@@ -1118,15 +1243,11 @@ const handleSearch = async () => {
   background: rgba(59, 130, 246, 0.1);
 }
 
-.training-sets {
-  font-family: var(--font-heading);
-  font-size: var(--body-sm);
-  font-weight: 700;
-  color: var(--text-main);
-  padding: 6px 12px;
-  border: 2px solid var(--border-visible);
-  background: var(--surface);
-  white-space: nowrap;
+.training-more {
+  padding: 10px 14px 2px;
+  font-size: var(--caption);
+  color: var(--text-secondary);
+  letter-spacing: 0.4px;
 }
 
 .common-foods-section {

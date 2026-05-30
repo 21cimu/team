@@ -3,17 +3,15 @@ package com.fitmind.module.admin.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fitmind.common.api.Result;
+import com.fitmind.common.security.CurrentUserProvider;
 import com.fitmind.module.achievement.entity.Achievement;
 import com.fitmind.module.achievement.service.IAchievementService;
 import com.fitmind.module.community.entity.CommunityPost;
 import com.fitmind.module.community.service.ICommunityPostService;
 import com.fitmind.module.user.entity.SysUser;
-import com.fitmind.module.user.mapper.SysUserMapper;
 import com.fitmind.module.user.service.ISysUserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -24,20 +22,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final SysUserMapper sysUserMapper;
+    private final CurrentUserProvider currentUserProvider;
     private final ISysUserService sysUserService;
     private final IAchievementService achievementService;
     private final ICommunityPostService communityPostService;
 
-    private SysUser getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        SysUser user = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
-        if (user == null) throw new RuntimeException("用户未认证");
-        return user;
-    }
-
     private void checkAdmin() {
-        SysUser user = getCurrentUser();
+        SysUser user = currentUserProvider.getCurrentUser();
         if (!"ADMIN".equals(user.getRole()) && !"admin".equals(user.getRole())) {
             throw new RuntimeException("权限不足：需要管理员角色");
         }

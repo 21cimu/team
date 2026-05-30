@@ -3,9 +3,13 @@ package com.fitmind.module.notification.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fitmind.common.cache.CacheNames;
+import com.fitmind.common.cache.UserCacheInvalidationService;
 import com.fitmind.module.notification.entity.Notification;
 import com.fitmind.module.notification.mapper.NotificationMapper;
 import com.fitmind.module.notification.service.INotificationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,7 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Notification> implements INotificationService {
+
+    private final UserCacheInvalidationService cacheInvalidationService;
 
     @Override
     public void sendNotification(Long userId, String type, String title, String content, Long relatedId, String relatedType) {
@@ -28,9 +35,11 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
         notification.setRelatedType(relatedType);
         notification.setCreateTime(LocalDateTime.now());
         this.save(notification);
+        cacheInvalidationService.evictNotifications(userId);
     }
 
     @Override
+    @Cacheable(cacheNames = CacheNames.NOTIFICATION_LIST, key = "#userId")
     public List<Notification> getUserNotifications(Long userId) {
         return this.list(new LambdaQueryWrapper<Notification>()
                 .eq(Notification::getUserId, userId)
@@ -39,6 +48,7 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
     }
 
     @Override
+    @Cacheable(cacheNames = CacheNames.NOTIFICATION_UNREAD_COUNT, key = "#userId")
     public Map<String, Object> getUnreadCount(Long userId) {
         long unread = this.count(new LambdaQueryWrapper<Notification>()
                 .eq(Notification::getUserId, userId)
@@ -57,6 +67,7 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
                 .eq(Notification::getId, notificationId)
                 .eq(Notification::getUserId, userId)
                 .set(Notification::getIsRead, 1));
+        cacheInvalidationService.evictNotifications(userId);
     }
 
     @Override
@@ -65,5 +76,6 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
                 .eq(Notification::getUserId, userId)
                 .eq(Notification::getIsRead, 0)
                 .set(Notification::getIsRead, 1));
+        cacheInvalidationService.evictNotifications(userId);
     }
 }
